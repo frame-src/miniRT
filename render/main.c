@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/01 18:18:49 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/02 19:40:19 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 mlx_image_t	*g_img;
 
 int color = 0;
+
+
+t_fcolor	calc_pixel_color(t_scene *scene, t_ray ray)
+{
+	t_fcolor	color;
+
+	
+}
+
+
 
 void	hook(void *param)
 {
@@ -28,8 +38,11 @@ void	hook(void *param)
 	{
 		while (x < WIDTH)
 		{
-			x++;
-			y++;
+			t_ray ray;
+			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
+			ray.origin = data->scene->camera.v_position;
+			calc_pixel_color(data->scene, ray);
+			color_pixel();
 		}
 	}	
 	

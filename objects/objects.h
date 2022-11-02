@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/11/01 15:53:20 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/02 19:36:27 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 #include "../vector/vecmath.h"
 #include "../render/render.h"
+
+typedef struct  s_ray
+{
+	t_vec3	origin;
+	t_vec3	direction;
+}				t_ray;
+
 typedef struct  s_fcolor
 {
     double   r;
