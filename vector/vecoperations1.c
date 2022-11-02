@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:02:49 by marius            #+#    #+#             */
-/*   Updated: 2022/10/28 23:51:18 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/01 17:11:25 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ double   vec3_dot(t_vec3 v0, t_vec3 v1)
 {
     return v0.x * v1.x + v0.y * v1.y + v0.z * v1.z;
 }
-#include <stdio.h>
 void    vec3_normalize(t_vec3 *v)
 {
 	double length;

@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/11/01 12:38:31 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:53:20 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 # define OBJECTS_H
 
 #include "../vector/vecmath.h"
-
+#include "../render/render.h"
 typedef struct  s_fcolor
 {
     double   r;
     double   g;  
     double   b;
 }               t_fcolor;
-
 
 typedef struct s_ambient
 {
@@ -31,10 +30,11 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
+	t_vec3		rays[HEIGHT][WIDTH];
 	t_vec3		v_position;
 	t_vec3		v_direction;
 	int			fov;
-	
+
 	t_matrix4x4	m_camera_world;
 	t_matrix4x4	m_world_camera;
 	t_vec3		v_up;

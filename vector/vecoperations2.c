@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:40:58 by marius            #+#    #+#             */
-/*   Updated: 2022/10/29 01:08:59 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/01 18:18:25 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,18 @@ t_vec3 vec3_div(double t, t_vec3 v)
     return (cross);
 }
 
-t_vec3 vec3_matrix_mult(t_matrix4x4 m, t_vec3 v, int pos_or_dir)
+t_vec3 vec3_matrix_mult(t_matrix4x4 m, t_vec3 v, int is_dir)
 {
 	t_vec3	res;
 
-	if (pos_or_dir)
-		pos_or_dir = 1;
+	if (is_dir)
+		is_dir = 0;
 	else
-		pos_or_dir = 0;
-	res.x = v.x * m.m[0][0] + v.y * m.m[0][1] + v.z * m.m[0][2] + pos_or_dir * m.m[0][3];
-	res.y = v.x * m.m[1][0] + v.y * m.m[1][1] + v.z * m.m[1][2] + pos_or_dir * m.m[1][3];
-	res.z = v.x * m.m[2][0] + v.y * m.m[2][1] + v.z * m.m[2][2] + pos_or_dir * m.m[2][3];
+		is_dir = 1;
+	res.x = v.x * m.m[0] + v.y * m.m[1] + v.z * m.m[2] + is_dir * m.m[3];
+	res.y = v.x * m.m[4] + v.y * m.m[5] + v.z * m.m[6] + is_dir * m.m[7];
+	res.z = v.x * m.m[8] + v.y * m.m[9] + v.z * m.m[10] + is_dir * m.m[11];
+
 	return (res);
 }
 

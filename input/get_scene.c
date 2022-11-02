@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/11/01 00:25:39 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/01 17:52:24 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,34 @@ int	load_ambient(char *line, t_ambient *ambient)
 	return (1);
 }
 
+
+int	set_cam_rays(t_vec3 rays[HEIGHT][WIDTH])
+{
+	int		x;
+	int		y;
+	t_vec3	ray;
+	double	xratio;
+	double	yratio;
+
+	y = 0;
+	xratio = 1.0L / WIDTH;
+	yratio = 1.0L / HEIGHT;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while(x < WIDTH)
+		{
+			ray.x = -0.5 + x * xratio + 0.5 * xratio;
+			ray.y = 0.5 - y * yratio - 0.5 * yratio;
+			ray.z = 1;
+			rays[x][y] = ray;
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
+
 int	load_camera(char *line, t_camera *camera)
 {
 	char **fields;
@@ -184,13 +212,16 @@ int	load_camera(char *line, t_camera *camera)
 	fields = ft_split(line, ' ');
 	if (!fields)
 		return (0);
-	camera->v_position = get_vector_field(fields[2]);
+	camera->v_position = get_vector_field(fields[1]);
 	if (camera->v_position.x == INFINITY && free_split(fields))
 		return (0);
-	camera->v_direction = get_vector_field(fields[3]);
+	camera->v_direction = get_vector_field(fields[2]);
 	if (camera->v_direction.x == INFINITY && free_split(fields))
 		return (0);
 	camera->fov = ft_atod(fields[3]);
+	set_cam_rays(camera->rays);
+	camera->m_camera_world = camera_to_world(camera->v_direction, camera->v_position);
+	invert_matrix(camera->m_camera_world.m, camera->m_world_camera.m);
 	free_split(fields);
 	return (1);
 }

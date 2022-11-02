@@ -1,6 +1,6 @@
 NAME=minirt
 CC=gcc
-CFLAGS=-Wall -Werror -Wextra -I/home/marius/Dev/minirt/MLX42/include
+CFLAGS=-Wall -Werror -Wextra -I/home/marius/Dev/miniRT/MLX42/include
 LFLAGS=-ldl -lglfw -pthread -lm
 MLX=libmlx42.a
 
