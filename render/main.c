@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frame <frame@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/24 20:34:09 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:43:56 by frame            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 void	hook(void *param)
 {
 	t_data	*data;
+	data= NULL;
+	if(data)
+		data = NULL;
 	int 	y;
 	int 	x;
 	t_color	color;
@@ -113,9 +116,6 @@ void	free_data()
 
 int	print_scene(t_scene *scene)
 {
-	int	i;
-
-	i = 0;
 	printf("=================Ambient Light==================\n");
 	printf("Color: %d %d %d\n", scene->ambient_l.color.r, scene->ambient_l.color.g, scene->ambient_l.color.b);
 	printf("Ratio%f\n", scene->ambient_l.ratio);
