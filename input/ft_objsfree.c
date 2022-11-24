@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   ft_objsfree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 15:03:26 by marius            #+#    #+#             */
-/*   Updated: 2022/11/13 18:27:52 by mawinter         ###   ########.fr       */
+/*   Created: 2022/03/26 18:45:40 by mawinter          #+#    #+#             */
+/*   Updated: 2022/11/24 19:36:02 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#include "input.h"
 
-#include "../objects/objects.h"
 
-t_matrix4x4	camera_to_world(t_vec3 v_direction, t_vec3 v_position);
-# define WIDTH 1000
-# define HEIGHT 1000
+int	ft_objsfree(t_object *lst)
+{
+	t_object *tmp;
 
-#endif
+	while (lst)
+	{
+		free(lst->cylinder);
+		free(lst->plane);
+		free(lst->sphere);
+		tmp = lst;
+		lst = lst->next;
+		free(tmp);
+	}
+	return (1);
+}

@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   ft_objadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 15:03:26 by marius            #+#    #+#             */
-/*   Updated: 2022/11/13 18:27:52 by mawinter         ###   ########.fr       */
+/*   Created: 2022/03/26 16:14:27 by mawinter          #+#    #+#             */
+/*   Updated: 2022/11/24 18:59:37 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#include "input.h"
 
-#include "../objects/objects.h"
+void	ft_objadd_back(t_object **lst, t_object *new)
+{
+	t_object	*temp;
 
-t_matrix4x4	camera_to_world(t_vec3 v_direction, t_vec3 v_position);
-# define WIDTH 1000
-# define HEIGHT 1000
-
-#endif
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	temp = *lst;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new;
+}

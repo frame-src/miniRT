@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:38:31 by marius            #+#    #+#             */
-/*   Updated: 2022/11/01 17:34:36 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/24 19:59:36 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ t_matrix4x4	camera_to_world(t_vec3 v_direction, t_vec3 v_position)
     m.m[1] = up.x,   m.m[5] = up.y,   m.m[9] = up.z; m.m[13] = 0.0f;
     m.m[2] = v_direction.x, m.m[6] = v_direction.y, m.m[10] = v_direction.z; m.m[14] = 0.0f;
     m.m[3] = v_position.x,    m.m[7] = v_position.y,    m.m[11] = v_position.z; m.m[15] = 1.0f;
-	print_matrix(m);
 	return m;
 }

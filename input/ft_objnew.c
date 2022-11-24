@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   ft_objnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 15:03:26 by marius            #+#    #+#             */
-/*   Updated: 2022/11/13 18:27:52 by mawinter         ###   ########.fr       */
+/*   Created: 2022/03/26 14:59:37 by mawinter          #+#    #+#             */
+/*   Updated: 2022/11/24 20:25:07 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#include "input.h"
 
-#include "../objects/objects.h"
+t_object	*ft_objnew()
+{
+	t_object	*newnode;
 
-t_matrix4x4	camera_to_world(t_vec3 v_direction, t_vec3 v_position);
-# define WIDTH 1000
-# define HEIGHT 1000
-
-#endif
+	newnode = ft_calloc(1, sizeof(t_object));
+	if (newnode == NULL)
+		return (NULL);
+	return (newnode);
+}

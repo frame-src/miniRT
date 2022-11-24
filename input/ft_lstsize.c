@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 15:03:26 by marius            #+#    #+#             */
-/*   Updated: 2022/11/13 18:27:52 by mawinter         ###   ########.fr       */
+/*   Created: 2022/03/26 15:58:30 by mawinter          #+#    #+#             */
+/*   Updated: 2022/11/24 20:02:12 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#include "input.h"
 
-#include "../objects/objects.h"
+int	ft_lstsize(t_object *lst)
+{
+	int	i;
 
-t_matrix4x4	camera_to_world(t_vec3 v_direction, t_vec3 v_position);
-# define WIDTH 1000
-# define HEIGHT 1000
-
-#endif
+	if (!lst)
+		return (0);
+	i = 1;
+	while (lst->next)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}

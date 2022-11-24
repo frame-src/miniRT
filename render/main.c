@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/24 18:38:53 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:34:09 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,50 +32,51 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 
 
 
-t_color	calc_pixel_color(t_scene *scene)
-{
-	double	t1;
-	double	t2;
-	double	t3;
+// t_color	calc_pixel_color(t_scene *scene)
+// {
+// 	double	t1;
+// 	double	t2;
+// 	double	t3;
 
-	t1 = 0.0L;
-	t2 = 0.0L;
-	t3 = 0.0L;
-	t1 = get_nearest_sphere();
-	t2 = get_nearest_plane();
-	t3 = get_nearest_cylinder();
-	if (t1 != -1.0L && t1 <= t2 && t2 <= t3)
-		;
-	else if (t2 != -1.0L && t2 <= t3 && t3 <= t1)
-		;
-	else if (t3 != -1.0L && t3 <= t2 && t2 <= t1)
-		;
-	else
-		printf("I Should Never Be Here\n");
+// 	t1 = 0.0L;
+// 	t2 = 0.0L;
+// 	t3 = 0.0L;
+// 	t1 = get_nearest_sphere();
+// 	t2 = get_nearest_plane();
+// 	t3 = get_nearest_cylinder();
+// 	if (t1 != -1.0L && t1 <= t2 && t2 <= t3)
+// 		;
+// 	else if (t2 != -1.0L && t2 <= t3 && t3 <= t1)
+// 		;
+// 	else if (t3 != -1.0L && t3 <= t2 && t2 <= t1)
+// 		;
+// 	else
+// 		printf("I Should Never Be Here\n");
 	
-}
+// }
 
-void	render(t_data *data)
-{
-	int		x;
-	int		y;
-	t_ray	ray; 
-	t_color	pixel_color;
+// void	render(t_data *data)
+// {
+// 	int		x;
+// 	int		y;
+// 	// t_ray	ray; 
+// 	// t_color	pixel_color;
 
-	x = 0;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		while (x < WIDTH)
-		{
-			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world,
-					data->scene->camera.rays[y][x], 1);
-			ray.origin = data->scene->camera.v_position;
-			pixel_color = calc_pixel_color(data->scene);
-			put_color_pixel(data, x, y, pixel_color);
-		}
-	}
-}
+// 	x = 0;
+// 	y = 0;
+// 	while (y < HEIGHT)
+// 	{
+// 		while (x < WIDTH)
+// 		{
+// 			// ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world,
+// 			// 		data->scene->camera.rays[y][x], 1);
+// 			// ray.origin = data->scene->camera.v_position;
+// 			// pixel_color = calc_pixel_color(data->scene);
+// 			// put_color_pixel(data, x, y, pixel_color);
+		
+// 		}
+// 	}
+// }
 
 
 void	hook(void *param)
@@ -94,17 +95,14 @@ void	hook(void *param)
 		x = 0;
 		while (x < WIDTH)
 		{
-			t_ray ray;
-			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
-			idx;
+			// t_ray ray;
+			// ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
 	
-			double  t = nearsetoj(&idx)
-			calc_color()
 			x++;
 		}
 		y++;
 	}
-	printf("%f\n", 1 / data->mlx->delta_time);
+	// printf("%f\n", 1 / data->mlx->delta_time);
 }
 
 
@@ -132,33 +130,33 @@ int	print_scene(t_scene *scene)
 	printf("Position: %f %f %f\n", scene->light.position.x, scene->light.position.y, scene->light.position.z);
 	printf("Ratio: %f\n", scene->light.brightness_ratio);
 	printf("Color: %d %d %d\n", scene->light.color.r, scene->light.color.g, scene->light.color.b);
-	printf("=================Sphere==================\n");
-	while (scene->spheres[i])
+	t_object *head = scene->objects;
+	while (head)
 	{
-		printf("Position: %f %f %f\n", scene->spheres[i]->position.x, scene->spheres[i]->position.y, scene->spheres[i]->position.z);
-		printf("Diameter: %f\n", scene->spheres[i]->radius);
-		printf("Color: %d %d %d\n", scene->spheres[i]->color.r, scene->spheres[i]->color.g, scene->spheres[i]->color.b);
-		i++;
-	}
-	i = 0;
-	printf("=================Plane==================\n");
-	while (scene->planes[i])
-	{
-		printf("Position: %f %f %f\n", scene->planes[i]->position.x, scene->planes[i]->position.y, scene->planes[i]->position.z);
-		printf("Normal Vec: %f %f %f\n", scene->planes[i]->normal_vec.x, scene->planes[i]->normal_vec.y, scene->planes[i]->normal_vec.z);
-		printf("Color: %d %d %d\n", scene->planes[i]->color.r, scene->planes[i]->color.g, scene->planes[i]->color.b);
-		i++;
-	}
-	i = 0;
-	printf("=================Cylinders==================\n");
-	while (scene->cylinders[i])
-	{
-		printf("Position: %f %f %f\n", scene->cylinders[i]->position.x, scene->cylinders[i]->position.y, scene->cylinders[i]->position.z);
-		printf("Normal Vec: %f %f %f\n", scene->cylinders[i]->normal_vec.x, scene->cylinders[i]->normal_vec.y, scene->cylinders[i]->normal_vec.z);
-		printf("Color: %d %d %d\n", scene->cylinders[i]->color.r, scene->cylinders[i]->color.g, scene->cylinders[i]->color.b);
-		printf("Diameter: %f\n", scene->cylinders[i]->diameter);
-		printf("Height: %f\n", scene->cylinders[i]->height);
-		i++;
+		if (head->type == 's')
+		{
+			printf("=================Sphere==================\n");
+			printf("Position: %f %f %f\n", head->sphere->position.x, head->sphere->position.y, head->sphere->position.z);
+			printf("Diameter: %f\n", head->sphere->radius);
+			printf("Color: %d %d %d\n", head->sphere->color.r, head->sphere->color.g, head->sphere->color.b);	
+		}
+		if (head->type == 'p')
+		{
+			printf("=================Plane==================\n");
+			printf("Position: %f %f %f\n", head->plane->position.x, head->plane->position.y, head->plane->position.z);
+			printf("Normal Vec: %f %f %f\n", head->plane->normal_vec.x, head->plane->normal_vec.y, head->plane->normal_vec.z);
+			printf("Color: %d %d %d\n", head->plane->color.r, head->plane->color.g, head->plane->color.b);	
+		}
+		if (head->type == 'c')
+		{
+			printf("=================Cylinders==================\n");
+			printf("Position: %f %f %f\n", head->cylinder->position.x, head->cylinder->position.y, head->cylinder->position.z);
+			printf("Normal Vec: %f %f %f\n", head->cylinder->orientation.x, head->cylinder->orientation.y, head->cylinder->orientation.z);
+			printf("Color: %d %d %d\n", head->cylinder->color.r, head->cylinder->color.g, head->cylinder->color.b);
+			printf("Diameter: %f\n", head->cylinder->diameter);
+			printf("Height: %f\n", head->cylinder->height);
+		}
+		head = head->next;
 	}
 	printf("================================================\n");
 	return (1);
@@ -179,6 +177,8 @@ int	main(int argc, char **argv)
 		printf("\nValid Input\n");
 	data = malloc(sizeof(t_data));
 	data->scene = get_scene(argv[1]);
+
+	printf("GET SCENE SUCCESSFULL");
 	print_scene(data->scene);
 	t_vec3 v;
 	v.x = -1;

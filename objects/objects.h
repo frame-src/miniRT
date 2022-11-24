@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/11/02 19:36:27 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/24 19:35:23 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ typedef struct  s_ray
 	t_vec3	direction;
 }				t_ray;
 
-typedef struct  s_fcolor
+typedef struct  s_color
 {
-    double   r;
-    double   g;  
-    double   b;
-}               t_fcolor;
+    int   r;
+    int   g;  
+    int   b;
+}               t_color;
 
 typedef struct s_ambient
 {
 	double		ratio;
-	t_fcolor	color;
+	t_color	color;
 }				t_ambient;
 
 typedef struct s_camera
@@ -53,43 +53,52 @@ typedef struct s_light
 {
 	t_vec3	position;
 	double	brightness_ratio;
-	t_fcolor	color;
+	t_color	color;
 }				t_light;
 
 typedef struct s_sphere
 {
 	t_vec3		position;
-	double		diameter;
-	t_fcolor	color;
-
-	t_matrix4x4	m_sphere_world;
-	t_matrix4x4	m_sphere_camera;
+	double		radius;
+	t_color		color;
 }				t_sphere;
 
 typedef struct s_plane
 {
 	t_vec3	position;
 	t_vec3	normal_vec;
-	t_fcolor	color;
+	t_color	color;
 }				t_plane;
+
 
 typedef struct s_cylinder
 {
 	t_vec3	position;
-	t_vec3	normal_vec;
+	t_vec3	orientation;
+	t_color	color;
+
 	double	diameter;
 	double	height;
-	t_fcolor	color;
+	t_matrix4x4	to_world;
+	t_matrix4x4	to_camera;
 }				t_cylinder;
+
+typedef struct s_object
+{
+	char		type;
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
+	struct s_object *next;
+}				t_object;
+
 
 typedef struct s_scene
 {
 	t_ambient	ambient_l;
 	t_camera	camera;
 	t_light		light;
-	t_sphere	**spheres;
-	t_plane		**planes;
-	t_cylinder	**cylinders;
+	t_object	*objects;
 }				t_scene;
 
 t_matrix4x4	camera_to_world(t_vec3 v_direction, t_vec3 v_position);

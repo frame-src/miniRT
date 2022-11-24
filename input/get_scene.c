@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_scene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/11/01 17:52:24 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/24 20:33:19 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,17 @@ int	obj_counter(char *filename, int *spherecount, int *planecount, int *cylinder
 void *alloc_objects(t_scene *scene, int counters[3])
 {
 	int i;
+	t_object	*tmp;
 
 	i = -1;
-	while (++i < counters[0])
+	while (++i < counters[0] + counters[1] + counters[2])
 	{
-		scene->spheres[i] = ft_calloc(1, sizeof(t_sphere));
-		if (!scene->spheres[i])
+		tmp = ft_objnew();
+		if (!tmp && ft_objsfree(scene->objects))
 			return (NULL);
+		ft_objadd_back(&scene->objects, tmp);
 	}
-	i = -1;
-	while (++i < counters[1])
-	{
-		scene->planes[i] = ft_calloc(1, sizeof(t_plane));
-		if (!scene->planes[i])
-			return (NULL);
-	}
-	i = -1;
-	while (++i < counters[2])
-	{
-		scene->cylinders[i] = ft_calloc(1, sizeof(t_cylinder));
-		if (!scene->cylinders[i])
-			return (NULL);
-	}
+	printf("allocated %d\n", i);
 	return ((void *)1);
 }
 
@@ -82,17 +71,8 @@ t_scene *alloc_scene(char *filename)
 	if (!scene && !close(fd))
 		return (NULL);
 	printf("sphere counter: %d\n", counters[0]);
-	printf("sphere counter: %d\n", counters[1]);
-	printf("sphere counter: %d\n", counters[2]);
-	scene->spheres = ft_calloc(counters[0] + 1, sizeof(t_sphere *));
-	if (!scene->spheres && !close(fd))
-		return (NULL);
-	scene->planes = ft_calloc(counters[1] + 1, sizeof(t_plane *));
-	if (!scene->planes && !close(fd))
-		return (NULL);
-	scene->cylinders = ft_calloc(counters[2] + 1, sizeof(t_cylinder *));
-	if (!scene->cylinders && !close(fd))
-		return (NULL);
+	printf("plane counter: %d\n", counters[1]);
+	printf("cylinder counter: %d\n", counters[2]);
 	if (!alloc_objects(scene, counters) && !close(fd))
 		return (NULL);
 	close(fd);
@@ -103,26 +83,23 @@ int	free_scene(t_scene *scene)
 {
 	if (scene)
 	{
-		
-	free_split_void((void *)scene->spheres);
-	free_split_void((void *)scene->planes);
-	free_split_void((void *)scene->cylinders);
-	free(scene);
+		ft_objsfree(scene->objects);
+		free(scene);
 	}
 	return (0);
 }
 
 
-t_fcolor	get_color_field(char *field)
+t_color	get_color_field(char *field)
 {
 	char **triple;
 	int		i;
-	t_fcolor	c;
+	t_color	c;
 
 	i = 0;
 	triple = ft_split(field, ',');
 	if (!triple)
-		return ((t_fcolor) {-1, -1, -1});
+		return ((t_color) {-1, -1, -1});
 	while(triple[i])
 	{
 		if (!i)
@@ -197,7 +174,8 @@ int	set_cam_rays(t_vec3 rays[HEIGHT][WIDTH])
 			ray.x = -0.5 + x * xratio + 0.5 * xratio;
 			ray.y = 0.5 - y * yratio - 0.5 * yratio;
 			ray.z = 1;
-			rays[x][y] = ray;
+			vec3_normalize(&ray);
+			rays[y][x] = ray;
 			x++;
 		}
 		y++;
@@ -241,66 +219,76 @@ int	load_light(char *line, t_light *light)
 	return (1);
 }
 
-int	load_sphere(char *line, t_sphere *sphere, int *counter)
+int	load_sphere(char *line, t_object *object)
 {
 	char **fields;
 
-	*counter = *counter + 1;
+	object->type = 's';
+	object->sphere = malloc(sizeof(t_sphere));
+	if (!object->sphere)
+		return (0);
 	fields = ft_split(line, ' ');
 	if (!fields)
 		return (0);
-	sphere->position = get_vector_field(fields[1]);
-	if (sphere->position.x == INFINITY && free_split(fields))
+	object->sphere->position = get_vector_field(fields[1]);
+	if (object->sphere->position.x == INFINITY && free_split(fields))
 		return (0);
-	sphere->diameter = ft_atod(fields[2]);
-	sphere->color = get_color_field(fields[3]);
-	if (sphere->color.r== -1 && free_split(fields))
+	object->sphere->radius = ft_atod(fields[2]) / 2;
+	object->sphere->color = get_color_field(fields[3]);
+	if (object->sphere->color.r== -1 && free_split(fields))
+		return (0);
+	free_split(fields);
+	printf("Loaded Sphere\n");
+	return (1);
+}
+
+int	load_plane(char *line, t_object *plane)
+{
+	char **fields;
+
+	plane->type = 'p';
+	plane->plane = malloc(sizeof(t_plane));
+	if (!plane->plane)
+		return (0);
+	fields = ft_split(line, ' ');
+	if (!fields)
+		return (0);
+	plane->plane->position = get_vector_field(fields[1]);
+	if (plane->plane->position.x == INFINITY && free_split(fields))
+		return (0);
+	plane->plane->normal_vec = get_vector_field(fields[2]);
+	if (plane->plane->position.x == INFINITY && free_split(fields))
+		return (0);
+	plane->plane->color = get_color_field(fields[3]);
+	if (plane->plane->color.r== -1 && free_split(fields))
 		return (0);
 	free_split(fields);
 	return (1);
 }
 
-int	load_plane(char *line, t_plane *plane, int *counter)
+int	load_cylinder(char *line, t_object *cylinder)
 {
 	char **fields;
 
-	*counter = *counter + 1;
+	cylinder->type = 'c';
+	cylinder->cylinder = malloc(sizeof(t_cylinder));
+	if (!cylinder->cylinder)
+		return (0);
 	fields = ft_split(line, ' ');
 	if (!fields)
 		return (0);
-	plane->position = get_vector_field(fields[1]);
-	if (plane->position.x == INFINITY && free_split(fields))
+	cylinder->cylinder->position = get_vector_field(fields[1]);
+	if (cylinder->cylinder->position.x == INFINITY && free_split(fields))
 		return (0);
-	plane->normal_vec = get_vector_field(fields[2]);
-	if (plane->position.x == INFINITY && free_split(fields))
-		return (0);
-	plane->color = get_color_field(fields[3]);
-	if (plane->color.r== -1 && free_split(fields))
-		return (0);
-	free_split(fields);
-	return (1);
-}
-
-int	load_cylinder(char *line, t_cylinder *cylinder, int *counter)
-{
-	char **fields;
-
-	*counter = *counter + 1;
-	fields = ft_split(line, ' ');
-	if (!fields)
-		return (0);
-	cylinder->position = get_vector_field(fields[1]);
-	if (cylinder->position.x == INFINITY && free_split(fields))
-		return (0);
-	cylinder->normal_vec = get_vector_field(fields[2]);
-	if (cylinder->position.x == INFINITY && free_split(fields))
+	cylinder->cylinder->orientation = get_vector_field(fields[2]);
+	if (cylinder->cylinder->position.x == INFINITY && free_split(fields))
 		return (0);
 
-	cylinder->diameter = ft_atod(fields[3]);
-	cylinder->height = ft_atod(fields[4]);
+	cylinder->cylinder->diameter = ft_atod(fields[3]);
+	cylinder->cylinder->height = ft_atod(fields[4]);
 		
-	cylinder->color = get_color_field(fields[5]);
-	if (cylinder->color.r== -1 && free_split(fields))
+	cylinder->cylinder->color = get_color_field(fields[5]);
+	if (cylinder->cylinder->color.r== -1 && free_split(fields))
 		return (0);
 	free_split(fields);
 	return (1);
@@ -310,20 +298,25 @@ int	load_cylinder(char *line, t_cylinder *cylinder, int *counter)
 t_scene	*get_scene(char *filename)
 {
 	int	fd;
-	int	counters[3];
 	t_scene	*scene;
 	char *line;
+	int	idx;
 
+	idx = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
 	scene = alloc_scene(filename);
-	ft_memset(counters, 0, 3 * sizeof(int));
 	if (!scene && !free_scene(scene))
 		return (NULL);
+
 	line = get_next_line(fd);
 	while (line)
 	{
+
+
+		printf("line %s\n", line);
+		usleep(20000);
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		if (!ft_strncmp(line, "A ", 2) && !load_ambient(line, &scene->ambient_l)
@@ -335,11 +328,11 @@ t_scene	*get_scene(char *filename)
 		else if (!ft_strncmp(line, "L ", 2) && !load_light(line, &scene->light)
 			&& free_1(line) && !close(fd))
 			return (NULL);
-		else if (!ft_strncmp(line, "sp ", 3)  && !load_sphere(line, scene->spheres[counters[0]], counters) && !close(fd))
+		else if (!ft_strncmp(line, "sp ", 3)  && !load_sphere(line, ft_objat(scene->objects, idx++)) && !close(fd))
 			return (NULL);
-		else if (!ft_strncmp(line, "pl ", 3)  && !load_plane(line, scene->planes[counters[1]], counters + 1) && !close(fd))
+		else if (!ft_strncmp(line, "pl ", 3)  && !load_plane(line, ft_objat(scene->objects, idx++)) && !close(fd))
 			return (NULL);
-		else if (!ft_strncmp(line, "cy ", 3)  && !load_cylinder(line, scene->cylinders[counters[2]], counters + 2) && !close(fd))
+		else if (!ft_strncmp(line, "cy ", 3)  && !load_cylinder(line, ft_objat(scene->objects, idx++)) && !close(fd))
 			return (NULL);
 		free(line);
 		line = get_next_line(fd);
