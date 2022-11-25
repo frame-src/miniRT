@@ -6,13 +6,13 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 15:38:54 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:44:29 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-double	get_sphere_intersect(t_ray ray, t_sphere *sphere)
+double	get_sphere_intersect(t_sphere *sphere, t_ray ray)
 {
 	t_vec3 oc = vec3_sub(ray.origin, sphere->position);
 	double A = 1.0f;
@@ -24,7 +24,7 @@ double	get_sphere_intersect(t_ray ray, t_sphere *sphere)
 	return (-B - sqrt(discriminant)) / (2.0 * A);
 }
 
-double	get_cylinder_intersect(t_ray ray, t_cylinder *cylinder)
+double	get_cylinder_intersect(t_cylinder *cylinder, t_ray ray)
 {
 	t_ray l_ray;
 
@@ -37,8 +37,27 @@ double	get_cylinder_intersect(t_ray ray, t_cylinder *cylinder)
 	double discriminant = sqrt(b) - 4 * a * c;
 	if (discriminant < 0)
 		return (-1.0);
-	return (-B - sqrt(discriminant)) / (2.0 * A);
+	return (-b - sqrt(discriminant)) / (2.0 * a);
 }
+
+double	get_plane_intersect( t_plane *plane, t_ray ray)
+{
+	//are the value already normalized?
+	double	denom;
+	double	nom;
+	t_vec3	tmp;
+
+	denom = vec3_dot(plane->normal_vec, ray.direction);
+	if (denom > 0)
+	{
+		tmp = vec3_sub(plane->position, ray.origin);
+		nom = vec3_dot(tmp, plane->normal_vec);
+		return (nom / denom);
+	}
+	else
+		return (-1);
+}
+
 
 t_object *obj_get_nearest(t_object *list, t_ray ray, double *t)
 {
@@ -55,7 +74,7 @@ t_object *obj_get_nearest(t_object *list, t_ray ray, double *t)
 	{
 		if (list->type == 's')
 		{
-			tmp = get_sphere_intersect(ray, list->sphere);
+			tmp = get_sphere_intersect(list->sphere, ray);
 			if (tmp >= 0.0L && tmp < *t)
 			{
 				*t = tmp;
@@ -64,7 +83,7 @@ t_object *obj_get_nearest(t_object *list, t_ray ray, double *t)
 		}
 		else if (list->type == 'p')
 		{
-			tmp = get_plane_intersect(ray, list->plane);
+			tmp = get_plane_intersect(list->plane, ray);
 			if (tmp >= 0.0L && tmp < *t)
 			{
 				*t = tmp;
@@ -73,7 +92,7 @@ t_object *obj_get_nearest(t_object *list, t_ray ray, double *t)
 		}
 		else if (list->type =='c')
 		{
-			tmp = get_cylinder_intersect(ray, list->plane);
+			tmp = get_cylinder_intersect(list->cylinder, ray);
 			if (tmp >= 0.0L && tmp < *t)
 			{
 				*t = tmp;
