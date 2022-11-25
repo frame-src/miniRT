@@ -1,5 +1,7 @@
 <h2> November 25 2022</h>
 
+NB: CHECK FOR NORMALIZED THE VALUES IN THE PARSING
+
 >	added plane intersection:
 int teory 
 	if the direction of the ray and the normal vector are parallel the dot product is zero; and they will never match;

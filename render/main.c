@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 16:49:52 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:17:40 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 // 		;
 // 	else
 // 		printf("I Should Never Be Here\n");
-	
 // }
 
 // void	render(t_data *data)
@@ -118,7 +117,7 @@ int	main(int argc, char **argv)
 	t_ray ray;
 	ray.origin.x = 0;
 	ray.origin.y = 0;
-	ray.origin.z = 10;
+	ray.origin.z = 0;
 	ray.direction = (t_vec3) {1, 0, 0};
 	double t = -1.0L;
 	obj_get_nearest(data->scene->objects, ray, &t);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_intersection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 16:49:10 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:24:06 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ double	get_plane_intersect( t_plane *plane, t_ray ray)
 	double	denom;
 	double	nom;
 	t_vec3	tmp;
-
+	
 	denom = vec3_dot(plane->normal_vec, ray.direction);
-	if (denom > 0)
+	if (denom != 0)
 	{
 		tmp = vec3_sub(plane->position, ray.origin);
 		nom = vec3_dot(tmp, plane->normal_vec);
