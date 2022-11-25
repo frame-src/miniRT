@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <h2> November 25 2022</h>
 
 >	added plane intersection:
@@ -10,7 +9,7 @@ int teory
 
 	that solved in t give us:
 	t = [(p0 - l0) dot n ]/[l dot n]; 
-=======
+
 November 25 2022
 
 >	added plane intersection:
@@ -22,18 +21,14 @@ November 25 2022
 
 		that solved in t give us:
 		t = [(p0 - l0) dot n ]/[l dot n]; 
->>>>>>> ad53f9f636cefbdd38d51f503fa101a0c30b2ed9
 ``` c
 
 double plane_intersection(t_plane, t_ray);
 ``` 
 
-<<<<<<< HEAD
 <h2> November 24 2022 </h>
-=======
 November 24 2022
 
->>>>>>> ad53f9f636cefbdd38d51f503fa101a0c30b2ed9
 
 ``` c
 t_object *object_return_nearest(t_object *list, t_ray *ray, double *t)
@@ -45,10 +40,7 @@ t_object *object_return_nearest(t_object *list, t_ray *ray, double *t)
 ```
 
 object_get_intersection(t_object *list,)
-<<<<<<< HEAD
-=======
 
->>>>>>> ad53f9f636cefbdd38d51f503fa101a0c30b2ed9
 ``` c
 t_color	*object_get_color(double *t, t_object *object, t_ray *ray)
 {
@@ -63,8 +55,4 @@ t_color	*object_get_color(double *t, t_object *object, t_ray *ray)
 	...
 
 }
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> ad53f9f636cefbdd38d51f503fa101a0c30b2ed9
