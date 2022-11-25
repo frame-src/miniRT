@@ -3,13 +3,7 @@
 # define EPSILON 0.00001
 #include <math.h>
 
-<<<<<<< HEAD
-typedef struct s_matrix4x4
-=======
-
-
 typedef struct  s_matrix4x4
->>>>>>> ad53f9f636cefbdd38d51f503fa101a0c30b2ed9
 {
 	double	m[16];
 }	t_matrix4x4;
@@ -44,5 +38,4 @@ t_vec3	vec3_matrix_mult(t_matrix4x4 m, t_vec3 v, int is_dir);
 void	print_matrix(t_matrix4x4 m);
 void	print_vec3(t_vec3 v);
 int		invert_matrix(const double m[16], double invOut[16]);
-void	mat4_transpose(double result[16]);
 #endif

@@ -6,7 +6,7 @@
 /*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 17:45:42 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:06:45 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,12 @@ int	main(int argc, char **argv)
 	else
 	data = malloc(sizeof(t_data));
 	data->scene = get_scene(argv[1]);
+	if (!data->scene)
+	{
+		printf("GET SCENE UNSUCCESSFULL\n");
+		free(data);
+		return 1;
+	}
 	print_scene(data->scene);
 	printf("GET SCENE SUCCESSFULL\n");
 	t_ray ray;

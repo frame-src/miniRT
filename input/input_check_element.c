@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check_element.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:43:57 by mawinter          #+#    #+#             */
-/*   Updated: 2022/10/31 15:26:31 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/25 17:51:28 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	valid_camera(char *line)
 		return (FALSE);
 	if (isnan(get_num(fields[3], 0.0L, 180.0L, 1)) && free_split(fields))
 		return (FALSE);
-
 	return (TRUE);
 }
 
