@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:11:08 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 14:13:50 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:55:34 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	print_scene(t_scene *scene)
 	printf("Position:   %f %f %f\n", scene->camera.v_position.x, scene->camera.v_position.y, scene->camera.v_position.z);
 	printf("Direction:  %f %f %f\n", scene->camera.v_direction.x, scene->camera.v_direction.y, scene->camera.v_direction.z);
 	printf("FOV:        %d\n", scene->camera.fov);
-	printf("-------------------------------------------------\n");
+	printf("---------------------to world---------------------\n");
 	print_matrix(scene->camera.m_camera_world);
-	printf("-------------------------------------------------\n");
+	printf("---------------------to cam---------------------\n");
 	print_matrix(scene->camera.m_world_camera);
 	printf("================= Light ==========================\n");
 	printf("Position:   %f %f %f\n", scene->light.position.x, scene->light.position.y, scene->light.position.z);
@@ -64,9 +64,9 @@ int	print_scene(t_scene *scene)
 			printf("Color:      %d %d %d\n", head->cylinder->color.r, head->cylinder->color.g, head->cylinder->color.b);
 			printf("Diameter:   %f\n", head->cylinder->diameter);
 			printf("Height:     %f\n", head->cylinder->height);
-			printf("-------------------------------------------------\n");
+			printf("--------------------to world----------------------\n");
 			print_matrix(head->cylinder->m_to_world);
-			printf("-------------------------------------------------\n");
+			printf("---------------------to cyl-----------------------\n");
 			print_matrix(head->cylinder->m_to_cylinder);
 		}
 		head = head->next;

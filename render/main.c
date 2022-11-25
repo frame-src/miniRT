@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 14:11:29 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:24:24 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ void	hook(void *param)
 		x = 0;
 		while (x < WIDTH)
 		{
-			// t_ray ray;
-			// ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
+			t_ray ray;
+			ray.origin = (t_vec3) {0.0L, 0.0L, 0.0L};
+			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
 	
 			x++;
 		}
@@ -115,9 +116,11 @@ int	main(int argc, char **argv)
 	print_scene(data->scene);
 	printf("GET SCENE SUCCESSFULL\n");
 	t_ray ray;
-	ray.origin = (t_vec3) {0, 0, 0};
-	ray.direction = (t_vec3) {1, 1, 1};
-	get_cylinder_intersect(ray, ft_objat(data->scene->objects, 2)->cylinder);
+	ray.origin.x = 0;
+	ray.origin.y = 0;
+	ray.origin.z = 10;
+	ray.direction = (t_vec3) {-1, 0, 0};
+	printf("t : %f\n",get_cylinder_intersect(ft_objat(data->scene->objects, 2)->cylinder, ray));
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false);
 	if (!data->mlx)
 		exit(EXIT_FAILURE);
