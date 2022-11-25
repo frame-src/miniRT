@@ -1,3 +1,4 @@
 minirt
 libmlx42.a
 .vscode
+*.o

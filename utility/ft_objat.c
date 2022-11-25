@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_objat.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/26 15:58:30 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/24 20:02:12 by mawinter         ###   ########.fr       */
+/*   Created: 2022/11/24 19:27:12 by mawinter          #+#    #+#             */
+/*   Updated: 2022/11/25 11:03:53 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "utils.h"
 
-int	ft_lstsize(t_object *lst)
+t_object *ft_objat(t_object *head, int idx)
 {
 	int	i;
 
-	if (!lst)
-		return (0);
-	i = 1;
-	while (lst->next)
+	i = 0;
+	while (head)
 	{
-		lst = lst->next;
+		if (idx == i || !head->next)
+			return (head);
 		i++;
+		head = head->next;
 	}
-	return (i);
+	printf("Should Never Be here\n");
+	return NULL;
 }

@@ -6,13 +6,13 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:38:31 by marius            #+#    #+#             */
-/*   Updated: 2022/11/24 19:59:36 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:28:56 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 
-t_matrix4x4	camera_to_world(t_vec3 v_direction, t_vec3 v_position)
+t_matrix4x4	object_to_world(t_vec3 v_direction, t_vec3 v_position)
 {
     t_matrix4x4	m;
 	t_vec3		tmp;

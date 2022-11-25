@@ -6,15 +6,17 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/11/24 19:35:23 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 14:12:49 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
 # define OBJECTS_H
-
+# include <stdio.h>
 #include "../vector/vecmath.h"
-#include "../render/render.h"
+
+# define WIDTH 1000
+# define HEIGHT 1000
 
 typedef struct  s_ray
 {
@@ -44,9 +46,6 @@ typedef struct s_camera
 
 	t_matrix4x4	m_camera_world;
 	t_matrix4x4	m_world_camera;
-	t_vec3		v_up;
-	t_vec3		v_right;
-	t_vec3		v_forward;
 }				t_camera;
 
 typedef struct s_light
@@ -79,8 +78,8 @@ typedef struct s_cylinder
 
 	double	diameter;
 	double	height;
-	t_matrix4x4	to_world;
-	t_matrix4x4	to_camera;
+	t_matrix4x4	m_to_cylinder;
+	t_matrix4x4	m_to_world;
 }				t_cylinder;
 
 typedef struct s_object
@@ -101,5 +100,9 @@ typedef struct s_scene
 	t_object	*objects;
 }				t_scene;
 
-t_matrix4x4	camera_to_world(t_vec3 v_direction, t_vec3 v_position);
+t_matrix4x4	object_to_world(t_vec3 v_direction, t_vec3 v_position);
+
+//print
+void	print_ray(t_ray ray);
+int	print_scene(t_scene *scene);
 #endif
