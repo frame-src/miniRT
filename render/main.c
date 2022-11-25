@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 21:48:19 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 22:48:19 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_color	color_of_object(t_object *obj)
 	if (obj->type == 'p')
 		return (obj->plane->color);
 	if (obj->type == 'c')
-		return (obj->plane->color);
+		return (obj->cylinder->color);
 	printf("No object Found");
 	return ((t_color) {0,0,0});
 }
@@ -152,9 +152,11 @@ int	main(int argc, char **argv)
 	ray.origin.x = 0;
 	ray.origin.y = 0;
 	ray.origin.z = 0;
-	ray.direction = (t_vec3) {1, 0, 1};
-	printf("t : %f\n",get_cylinder_intersect(ft_objat(data->scene->objects, 2)->cylinder, ray));
-	return 1;
+	ray.direction = (t_vec3) {0, 1, 1};
+	double t = get_cylinder_intersect(ft_objat(data->scene->objects, 2)->cylinder, ray);
+	printf("t %f\n", t);
+	print_vec3(vec3_mult(t, ray.direction));
+	// return 1;
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false);
 	if (!data->mlx)
 		exit(EXIT_FAILURE);

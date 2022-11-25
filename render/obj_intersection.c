@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 21:46:31 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 22:30:25 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ double	get_cylinder_intersect(t_cylinder *cylinder, t_ray ray)
 
 	l_ray.direction = vec3_matrix_mult(cylinder->m_to_cylinder, ray.direction, 1);
 	l_ray.origin = vec3_matrix_mult(cylinder->m_to_cylinder, ray.origin, 0);
-
-	print_ray(l_ray);
+	// print_ray(l_ray);
 	double a = pow(l_ray.direction.x, 2) + pow(l_ray.direction.y, 2);
-	double b = 2.0L * (l_ray.origin.x * l_ray.direction.x + l_ray.origin.y * l_ray.direction.y);
+	double b = 2.0L * l_ray.origin.x * l_ray.direction.x +  2 * l_ray.origin.y * l_ray.direction.y;
 	double c = pow(l_ray.origin.x, 2) + pow(l_ray.origin.y, 2) - pow(cylinder->diameter / 2.0L, 2);
 	double discriminant = pow(b, 2) - (4 * a * c);
 	// printf("%f\n", sqrt(discriminant)/ (2*a));

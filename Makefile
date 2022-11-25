@@ -49,6 +49,11 @@ clean:
 	cd ./MLX42 && make clean
 	rm -rf $(inputobjspath) $(utilityobjspath) $(vectorobjspath) $(renderobjspath) $(objectobjspath)
 
+debug:
+	cd ./MLX42 && make
+	mv ./MLX42/$(MLX) .
+	$(CC) $(CFLAGS) -g $(inputsourcespath) $(utilitsourcesspath) $(vectorsourcespath) $(rendersourcespath) $(objectsourcespath) $(MLX) -o $(NAME) $(LFLAGS)
+
 fclean: clean
 	rm -rf $(MLX)
 	rm -rf $(NAME)
