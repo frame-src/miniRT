@@ -19,9 +19,5 @@ double	plane_get_intersection( t_plane *plane, t_ray *ray)
 		return (-1);
 }
 
-color_get_intersection
+color_get_intersection()
 
-t_ray	*ray_cast_inter_to_light(double t, t_ray	*ray,)
-{
-	origin_set()
-}

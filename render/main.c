@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frame <frame@student.42.fr>                +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/24 20:43:56 by frame            ###   ########.fr       */
+/*   Updated: 2022/11/25 16:55:45 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 double get_sphere_intersect(t_ray ray, t_sphere *cur_sphere)
 {
-		t_vec3 oc = vec3_sub(ray.origin, cur_sphere->position);
-    	double A = 1.0f;
-    	double B = 2.0 * vec3_dot(oc, ray.direction);
-    	double C = vec3_dot(oc, oc) - (cur_sphere->radius)*(cur_sphere->radius);
-    	double discriminant = B*B - 4*A*C;
-    	if(discriminant < 0)
-    	    return (-1.0);
-    	return (-B - sqrt(discriminant)) / (2.0*A);
+	t_vec3 oc = vec3_sub(ray.origin, cur_sphere->position);
+	double A = 1.0f;
+	double B = 2.0 * vec3_dot(oc, ray.direction);
+	double C = vec3_dot(oc, oc) - (cur_sphere->radius)*(cur_sphere->radius);
+	double discriminant = B*B - 4*A*C;
+	if(discriminant < 0)
+		return (-1.0);
+	return (-B - sqrt(discriminant)) / (2.0*A);
 }
-
 
 void	put_color_pixel(t_data *data, int x, int y, t_color color)
 {
@@ -195,7 +194,7 @@ int	main(int argc, char **argv)
 	data->g_img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	memset(data->g_img->pixels, 255, data->g_img->width * data->g_img->height * sizeof(int));
 	mlx_image_to_window(data->mlx, data->g_img, 0, 0);
-	 mlx_loop_hook(data->mlx, &hook, data);
+	mlx_loop_hook(data->mlx, &hook, data);
 	//hook(data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
