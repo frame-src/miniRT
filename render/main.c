@@ -6,7 +6,7 @@
 /*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 18:59:10 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:00:16 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	hook(void *param)
 				newray = light_ray(t, &ray,data->scene);
 				t_object *obj =  obj_get_nearest(data->scene->objects, newray, &t);
 				if(!obj && t < 0.0L)				
-					;//ONLY AMBIENT
+					;// FULL LIGHT
 				else
 					;//AMBIENT LIGHT + SHADING;
 			}
