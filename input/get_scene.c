@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/11/25 17:57:35 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:03:52 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,8 +199,8 @@ int	load_camera(char *line, t_camera *camera)
 	set_cam_rays(camera->rays);
 	camera->m_camera_world = object_to_world(camera->v_direction, camera->v_position);
 	invert_matrix(camera->m_camera_world.m, camera->m_world_camera.m);
-	if (d_nearly_equal(1.0L, vec3_dot(camera->v_direction, camera->v_direction))
-		&& free_split(fields) && write(2, "Orientation vector mus be normalized\n", 38))
+	if (!d_nearly_equal(1.0L, vec3_dot(camera->v_direction, camera->v_direction))
+		&& free_split(fields) && write(2, "Camera Orientation vector must be normalized\n", 46))
 		return (0);
 	free_split(fields);
 	return (1);
@@ -263,8 +263,8 @@ int	load_plane(char *line, t_object *plane)
 	plane->plane->color = get_color_field(fields[3]);
 	if (plane->plane->color.r== -1 && free_split(fields))
 		return (0);
-	if (d_nearly_equal(1.0L, vec3_dot(plane->plane->normal_vec, plane->plane->normal_vec))
-		&& free_split(fields) && write(2, "Orientation vector mus be normalized\n", 38))
+	if (!d_nearly_equal(1.0L, vec3_dot(plane->plane->normal_vec, plane->plane->normal_vec))
+		&& free_split(fields) && write(2, "Plane Orientation vector must be normalized\n", 45))
 		return (0);
 	free_split(fields);
 	return (1);
@@ -294,8 +294,8 @@ int	load_cylinder(char *line, t_object *object)
 		return (0);
 	object->cylinder->m_to_world = object_to_world(object->cylinder->orientation, object->cylinder->position);
 	invert_matrix(object->cylinder->m_to_world.m, object->cylinder->m_to_cylinder.m);
-	if (d_nearly_equal(1.0L, vec3_dot(object->cylinder->orientation, object->cylinder->orientation))
-		&& free_split(fields) && write(2, "Orientation vector mus be normalized\n", 38))
+	if (!d_nearly_equal(1.0L, vec3_dot(object->cylinder->orientation, object->cylinder->orientation))
+		&& free_split(fields) && write(2, "Cylinder Orientation vector must be normalized\n", 48))
 		return (0);
 	free_split(fields);
 	return (1);
@@ -340,6 +340,5 @@ t_scene	*get_scene(char *filename)
 		free(line);
 		line = get_next_line(fd);
 	}
-
 	return (scene);
 }
