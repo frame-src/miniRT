@@ -6,7 +6,7 @@
 /*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 18:06:45 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:59:10 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	hook(void *param)
 	int 	y;
 	int 	x;
 	t_color	color;
+	t_ray	newray;
 
 	color.r = 0; color.g = 0; color.b = 255;
 	data = param;
@@ -95,9 +96,23 @@ void	hook(void *param)
 		while (x < WIDTH)
 		{
 			t_ray ray;
-			ray.origin = (t_vec3) {0.0L, 0.0L, 0.0L};
-			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
-	
+				ray.origin = data->scene->camera.v_position;
+				ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
+			double t = -1;
+			t_object obj =  obj_get_nearest(data->scene->objects, ray, &t);
+			if (!obj && t < 0.0L)
+				;//hit nothing color ambient	
+			else
+			{
+				//calc point
+				// vector from potint to light
+				newray = light_ray(t, &ray,data->scene);
+				t_object *obj =  obj_get_nearest(data->scene->objects, newray, &t);
+				if(!obj && t < 0.0L)				
+					;//ONLY AMBIENT
+				else
+					;//AMBIENT LIGHT + SHADING;
+			}
 			x++;
 		}
 		y++;
