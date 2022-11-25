@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_objat.c                                         :+:      :+:    :+:   */
+/*   ft_objsfree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 19:27:12 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/24 19:33:09 by mawinter         ###   ########.fr       */
+/*   Created: 2022/03/26 18:45:40 by mawinter          #+#    #+#             */
+/*   Updated: 2022/11/25 11:04:03 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "utils.h"
 
-t_object *ft_objat(t_object *head, int idx)
+int	ft_objsfree(t_object *lst)
 {
-	int	i;
+	t_object *tmp;
 
-	i = 0;
-	while (head)
+	while (lst)
 	{
-		if (idx == i || !head->next)
-			return (head);
-		i++;
-		head = head->next;
+		free(lst->cylinder);
+		free(lst->plane);
+		free(lst->sphere);
+		tmp = lst;
+		lst = lst->next;
+		free(tmp);
 	}
-	printf("Should Never Be here\n");
-	return NULL;
+	return (1);
 }
