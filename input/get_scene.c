@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/11/24 20:33:19 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:43:03 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void *alloc_objects(t_scene *scene, int counters[3])
 			return (NULL);
 		ft_objadd_back(&scene->objects, tmp);
 	}
-	printf("allocated %d\n", i);
 	return ((void *)1);
 }
 
@@ -198,7 +197,7 @@ int	load_camera(char *line, t_camera *camera)
 		return (0);
 	camera->fov = ft_atod(fields[3]);
 	set_cam_rays(camera->rays);
-	camera->m_camera_world = camera_to_world(camera->v_direction, camera->v_position);
+	camera->m_camera_world = object_to_world(camera->v_direction, camera->v_position);
 	invert_matrix(camera->m_camera_world.m, camera->m_world_camera.m);
 	free_split(fields);
 	return (1);
@@ -238,7 +237,6 @@ int	load_sphere(char *line, t_object *object)
 	if (object->sphere->color.r== -1 && free_split(fields))
 		return (0);
 	free_split(fields);
-	printf("Loaded Sphere\n");
 	return (1);
 }
 
@@ -266,30 +264,31 @@ int	load_plane(char *line, t_object *plane)
 	return (1);
 }
 
-int	load_cylinder(char *line, t_object *cylinder)
+int	load_cylinder(char *line, t_object *object)
 {
 	char **fields;
 
-	cylinder->type = 'c';
-	cylinder->cylinder = malloc(sizeof(t_cylinder));
-	if (!cylinder->cylinder)
+	object->type = 'c';
+	object->cylinder = malloc(sizeof(t_cylinder));
+	if (!object->cylinder)
 		return (0);
 	fields = ft_split(line, ' ');
 	if (!fields)
 		return (0);
-	cylinder->cylinder->position = get_vector_field(fields[1]);
-	if (cylinder->cylinder->position.x == INFINITY && free_split(fields))
+	object->cylinder->position = get_vector_field(fields[1]);
+	if (object->cylinder->position.x == INFINITY && free_split(fields))
 		return (0);
-	cylinder->cylinder->orientation = get_vector_field(fields[2]);
-	if (cylinder->cylinder->position.x == INFINITY && free_split(fields))
+	object->cylinder->orientation = get_vector_field(fields[2]);
+	if (object->cylinder->position.x == INFINITY && free_split(fields))
 		return (0);
 
-	cylinder->cylinder->diameter = ft_atod(fields[3]);
-	cylinder->cylinder->height = ft_atod(fields[4]);
-		
-	cylinder->cylinder->color = get_color_field(fields[5]);
-	if (cylinder->cylinder->color.r== -1 && free_split(fields))
+	object->cylinder->diameter = ft_atod(fields[3]);
+	object->cylinder->height = ft_atod(fields[4]);
+	object->cylinder->color = get_color_field(fields[5]);
+	if (object->cylinder->color.r== -1 && free_split(fields))
 		return (0);
+	object->cylinder->m_to_world = object_to_world(object->cylinder->orientation, object->cylinder->position);
+	invert_matrix(object->cylinder->m_to_world.m, object->cylinder->m_to_cylinder.m);
 	free_split(fields);
 	return (1);
 }
@@ -313,10 +312,6 @@ t_scene	*get_scene(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
-
-
-		printf("line %s\n", line);
-		usleep(20000);
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		if (!ft_strncmp(line, "A ", 2) && !load_ambient(line, &scene->ambient_l)
@@ -337,7 +332,6 @@ t_scene	*get_scene(char *filename)
 		free(line);
 		line = get_next_line(fd);
 	}
-		write(1, "out\n", 5);
 
 	return (scene);
 }

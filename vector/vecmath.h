@@ -3,7 +3,13 @@
 # define EPSILON 0.00001
 #include <math.h>
 
+<<<<<<< HEAD
 typedef struct s_matrix4x4
+=======
+
+
+typedef struct  s_matrix4x4
+>>>>>>> ad53f9f636cefbdd38d51f503fa101a0c30b2ed9
 {
 	double	m[16];
 }	t_matrix4x4;

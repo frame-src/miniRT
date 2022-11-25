@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 03:09:40 by marius            #+#    #+#             */
-/*   Updated: 2022/11/24 20:02:32 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:02:23 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,6 @@ double	get_num(char *field, double min, double max, int is_int);
 t_scene	*get_scene(char *filename);
 
 
-//
-void	ft_objadd_back(t_object **lst, t_object *new);
-int	ft_objsfree(t_object *lst);
-t_object	*ft_objnew();
-t_object *ft_objat(t_object *head, int idx);
-int	ft_lstsize(t_object *lst);
 
 
 #endif

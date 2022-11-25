@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:13:05 by mawinter          #+#    #+#             */
-/*   Updated: 2022/10/31 23:47:46 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/25 11:03:30 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define BUFFER_SIZE 15
 # include <stdio.h>
 # include "fcntl.h"
-
+# include "../objects/objects.h"
 /* 						getnextline						*/
 int				get_idx_read(char *infobufd, int mode);
 int				readnew(char *infobufd, char *buf, int fd);
@@ -41,4 +41,12 @@ int				free_1(void *ptr);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 void			*ft_memset(void *s, int c, size_t n);
 int				free_split_void(void **splitted);
+
+
+// objs help
+void	ft_objadd_back(t_object **lst, t_object *new);
+int	ft_objsfree(t_object *lst);
+t_object	*ft_objnew();
+t_object *ft_objat(t_object *head, int idx);
+int	ft_lstsize(t_object *lst);
 #endif
