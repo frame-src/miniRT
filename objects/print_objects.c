@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:11:08 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 15:55:34 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:51:51 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	print_scene(t_scene *scene)
 		{
 			printf("================= Sphere =========================\n");
 			printf("Position:   %f %f %f\n", head->sphere->position.x, head->sphere->position.y, head->sphere->position.z);
-			printf("Diameter:   %f\n", head->sphere->radius);
+			printf("Radius:   %f\n", head->sphere->radius);
 			printf("Color:      %d %d %d\n", head->sphere->color.r, head->sphere->color.g, head->sphere->color.b);	
 		}
 		if (head->type == 'p')

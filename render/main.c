@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 16:24:24 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:49:52 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,10 @@ int	main(int argc, char **argv)
 	ray.origin.x = 0;
 	ray.origin.y = 0;
 	ray.origin.z = 10;
-	ray.direction = (t_vec3) {-1, 0, 0};
-	printf("t : %f\n",get_cylinder_intersect(ft_objat(data->scene->objects, 2)->cylinder, ray));
+	ray.direction = (t_vec3) {1, 0, 0};
+	double t = -1.0L;
+	obj_get_nearest(data->scene->objects, ray, &t);
+	// printf("t : %f\n",get_cylinder_intersect(ft_objat(data->scene->objects, 2)->cylinder, ray));
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false);
 	if (!data->mlx)
 		exit(EXIT_FAILURE);

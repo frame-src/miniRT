@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 16:29:17 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:49:10 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ double	get_sphere_intersect( t_sphere *sphere, t_ray ray)
 	double discriminant = B * B - 4 * A * C;
 	if (discriminant < 0)
 		return (-1.0);
-	printf("sphere: t: %f\n", (-B - sqrt(discriminant)) / (2.0 * a));
+	printf("sphere: t: %f\n", (-B - sqrt(discriminant)) / (2.0 * A));
 	return (-B - sqrt(discriminant)) / (2.0 * A);
 }
 
@@ -73,8 +73,10 @@ t_object *obj_get_nearest(t_object *list, t_ray ray, double *t)
 	idx = 0;
 	minidx = 0;
 	tmp = -1.0l;
+	printf("START\n");
 	while (list)
 	{
+		printf("type %c\n", list->type);
 		if (list->type == 's')
 		{
 			tmp = get_sphere_intersect(list->sphere, ray);
