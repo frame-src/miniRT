@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 03:09:40 by marius            #+#    #+#             */
-/*   Updated: 2022/11/25 11:02:23 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:31:36 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #define MALLOC_FAIL "Error\nMalloc Fail\n"
 #define TRAIL_DECIMAL_POINT "Error\nCan't Have Leading Or Trailing Decimal Points\n"
 #define WRONG_CHAR "Error\nWrong Specifier\n"
-#define NUM3 "Error\nColors Have To Be 3 Numbers\n"
+#define NUM3 "Error\nField Has To Be 3 Numbers\n"
 #define	MINUS_POS "Error\nMinus At The Wrong Position\n"
 #define	NO_FLOAT "Error\nNumber Needs To Be An Integer\n"
 #define SPECIFIIER "Error\nWrong Element Type\n"

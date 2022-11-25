@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:03:26 by marius            #+#    #+#             */
-/*   Updated: 2022/11/25 15:44:56 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:21:59 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ double	get_sphere_intersect(t_sphere *sphere, t_ray ray);
 t_object *obj_get_nearest(t_object *list, t_ray ray, double *t);
 double	get_cylinder_intersect(t_cylinder *cylinder, t_ray ray);
 double	get_plane_intersect( t_plane *plane, t_ray ray);
+t_ray	light_ray(double t, t_ray *ray, t_scene *scene);
 #endif

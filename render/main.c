@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 19:00:16 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:48:19 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
-
-double get_sphere_intersect(t_ray ray, t_sphere *cur_sphere)
-{
-	t_vec3 oc = vec3_sub(ray.origin, cur_sphere->position);
-	double A = 1.0f;
-	double B = 2.0 * vec3_dot(oc, ray.direction);
-	double C = vec3_dot(oc, oc) - (cur_sphere->radius)*(cur_sphere->radius);
-	double discriminant = B*B - 4*A*C;
-	if(discriminant < 0)
-		return (-1.0);
-	return (-B - sqrt(discriminant)) / (2.0*A);
-}
 
 void	put_color_pixel(t_data *data, int x, int y, t_color color)
 {
@@ -74,6 +62,17 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 // 	}
 // }
 
+t_color	color_of_object(t_object *obj)
+{
+	if (obj->type == 's')
+		return (obj->sphere->color);
+	if (obj->type == 'p')
+		return (obj->plane->color);
+	if (obj->type == 'c')
+		return (obj->plane->color);
+	printf("No object Found");
+	return ((t_color) {0,0,0});
+}
 
 void	hook(void *param)
 {
@@ -84,7 +83,7 @@ void	hook(void *param)
 	int 	y;
 	int 	x;
 	t_color	color;
-	t_ray	newray;
+	// t_ray	newray;
 
 	color.r = 0; color.g = 0; color.b = 255;
 	data = param;
@@ -96,28 +95,31 @@ void	hook(void *param)
 		while (x < WIDTH)
 		{
 			t_ray ray;
-				ray.origin = data->scene->camera.v_position;
-				ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
-			double t = -1;
-			t_object obj =  obj_get_nearest(data->scene->objects, ray, &t);
-			if (!obj && t < 0.0L)
-				;//hit nothing color ambient	
-			else
+			ray.origin = data->scene->camera.v_position;
+			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
+			double t = INFINITY;
+			t_object *obj =  obj_get_nearest(data->scene->objects, ray, &t);
+			if (!obj)
+				put_color_pixel(data, x, y, (t_color){125,0,0});	
+			else if (obj)
 			{
+				// printf("hit somehting %f\n", t);
 				//calc point
 				// vector from potint to light
-				newray = light_ray(t, &ray,data->scene);
-				t_object *obj =  obj_get_nearest(data->scene->objects, newray, &t);
-				if(!obj && t < 0.0L)				
-					;// FULL LIGHT
-				else
-					;//AMBIENT LIGHT + SHADING;
+				// newray = light_ray(t, &ray,data->scene);
+				// t_object *obj =  obj_get_nearest(data->scene->objects, newray, &t);
+				// if(!obj && t < 0.0L)				
+				// 	put_color_pixel(data, x, y, color_of_object(obj));
+				// else
+					put_color_pixel(data, x, y, color_of_object(obj));
+
 			}
 			x++;
 		}
+			printf("llop");
 		y++;
 	}
-	// printf("%f\n", 1 / data->mlx->delta_time);
+	printf("%f\n", 1 / data->mlx->delta_time);
 }
 
 
@@ -150,10 +152,9 @@ int	main(int argc, char **argv)
 	ray.origin.x = 0;
 	ray.origin.y = 0;
 	ray.origin.z = 0;
-	ray.direction = (t_vec3) {1, 0, 0};
-	double t = -1.0L;
-	obj_get_nearest(data->scene->objects, ray, &t);
-	// printf("t : %f\n",get_cylinder_intersect(ft_objat(data->scene->objects, 2)->cylinder, ray));
+	ray.direction = (t_vec3) {1, 0, 1};
+	printf("t : %f\n",get_cylinder_intersect(ft_objat(data->scene->objects, 2)->cylinder, ray));
+	return 1;
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false);
 	if (!data->mlx)
 		exit(EXIT_FAILURE);
