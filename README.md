@@ -1,4 +1,4 @@
-<h2> November 25 2022</h>
+November 25 2022
 
 >	added plane intersection:
 	int teory 
@@ -9,35 +9,37 @@
 
 		that solved in t give us:
 		t = [(p0 - l0) dot n ]/[l dot n]; 
-	``` c
+``` c
 
-	double plane_intersection(t_plane, t_ray);
-	``` 
+double plane_intersection(t_plane, t_ray);
+``` 
 
-<h2> November 24 2022 </h>
+November 24 2022
 
-	``` c
-	t_object *object_return_nearest(t_object *list, t_ray *ray, double *t)
-	{
-		iterate through the list
-		if(call object_get_intersection
-		and return the index of the nearest one;
-	}
-	```
+
+``` c
+t_object *object_return_nearest(t_object *list, t_ray *ray, double *t)
+{
+	iterate through the list
+	if(call object_get_intersection
+	and return the index of the nearest one;
+}
+```
 
 object_get_intersection(t_object *list,)
-	``` c
-	t_color	*object_get_color(double *t, t_object *object, t_ray *ray)
-	{
-		t_point *point;
 
-		point = point_calculate( t, ray);
+``` c
+t_color	*object_get_color(double *t, t_object *object, t_ray *ray)
+{
+	t_point *point;
 
-		if(object.type == spehere)
-			spehere_get_color()...
-		if(...)
-			..._get_color()...
-		...
+	point = point_calculate( t, ray);
 
-	}
-	```
+	if(object.type == spehere)
+		spehere_get_color()...
+	if(...)
+		..._get_color()...
+	...
+
+}
+```
