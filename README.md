@@ -1,15 +1,3 @@
-<h2> November 25 2022</h>
-
->	added plane intersection:
-int teory 
-	if the direction of the ray and the normal vector are parallel the dot product is zero; and they will never match;
-	else if they have a solution that is given by the common point so:
-	(p - p0) dot n = 0
-	l0 + l*t = p;
-
-	that solved in t give us:
-	t = [(p0 - l0) dot n ]/[l dot n]; 
-
 November 25 2022
 
 >	added plane intersection:
@@ -26,7 +14,6 @@ November 25 2022
 double plane_intersection(t_plane, t_ray);
 ``` 
 
-<h2> November 24 2022 </h>
 November 24 2022
 
 
