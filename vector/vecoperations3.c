@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vecoperations3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:58:26 by marius            #+#    #+#             */
-/*   Updated: 2022/11/01 17:42:44 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/25 17:47:44 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,42 +149,4 @@ int invert_matrix(const double m[16], double invOut[16])
     for (i = 0; i < 16; i++)
         invOut[i] = inv[i] * det;
     return 1;
-}
-
-
-void	mat4_transpose(double result[16])
-{
-	double transposed[16];
-	transposed[0] = result[0];
-	transposed[1] = result[4];
-	transposed[2] = result[8];
-	transposed[3] = result[12];
-	transposed[4] = result[1];
-	transposed[5] = result[5];
-	transposed[6] = result[9];
-	transposed[7] = result[13];
-	transposed[8] = result[2];
-	transposed[9] = result[6];
-	transposed[10] = result[10];
-	transposed[11] = result[14];
-	transposed[12] = result[3];
-	transposed[13] = result[7];
-	transposed[14] = result[11];
-	transposed[15] = result[15];
-	result[0] = transposed[0];
-	result[1] = transposed[1];
-	result[2] = transposed[2];
-	result[3] = transposed[3];
-	result[4] = transposed[4];
-	result[5] = transposed[5];
-	result[6] = transposed[6];
-	result[7] = transposed[7];
-	result[8] = transposed[8];
-	result[9] = transposed[9];
-	result[10] = transposed[10];
-	result[11] = transposed[11];
-	result[12] = transposed[12];
-	result[13] = transposed[13];
-	result[14] = transposed[14];
-	result[15] = transposed[15];
 }

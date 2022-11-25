@@ -44,5 +44,4 @@ t_vec3	vec3_matrix_mult(t_matrix4x4 m, t_vec3 v, int is_dir);
 void	print_matrix(t_matrix4x4 m);
 void	print_vec3(t_vec3 v);
 int		invert_matrix(const double m[16], double invOut[16]);
-void	mat4_transpose(double result[16]);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:13:05 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 11:03:30 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:50:28 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,6 @@ int	ft_objsfree(t_object *lst);
 t_object	*ft_objnew();
 t_object *ft_objat(t_object *head, int idx);
 int	ft_lstsize(t_object *lst);
+
+int	d_nearly_equal(double d1, double d2);
 #endif
