@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/11/25 14:12:49 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/26 16:15:02 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ typedef struct  s_ray
 	t_vec3	direction;
 }				t_ray;
 
-typedef struct  s_color
+typedef struct	s_color
 {
     int   r;
-    int   g;  
+    int   g;
     int   b;
-}               t_color;
+}				t_color;
 
 typedef struct s_ambient
 {
@@ -104,5 +104,5 @@ t_matrix4x4	object_to_world(t_vec3 v_direction, t_vec3 v_position);
 
 //print
 void	print_ray(t_ray ray);
-int	print_scene(t_scene *scene);
+int		print_scene(t_scene *scene);
 #endif
