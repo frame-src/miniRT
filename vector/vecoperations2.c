@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vecoperations2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:40:58 by marius            #+#    #+#             */
-/*   Updated: 2022/11/02 18:30:13 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/26 23:57:59 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ t_vec3 vec3_div(double t, t_vec3 v)
 	cross.z = t / v.z;
     return (cross);
 }
-
+/*
+	matrix that return a vector if is_dir is 1;
+	a point in the new coordinates if is_dir = 0;
+*/
 t_vec3 vec3_matrix_mult(t_matrix4x4 m, t_vec3 v, int is_dir)
 {
 	t_vec3	res;
