@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 22:48:19 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/27 00:49:33 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 // 		}
 // 	}
 // }
-
+/*
+	
+*/
 t_color	color_of_object(t_object *obj)
 {
 	if (obj->type == 's')
@@ -96,11 +98,19 @@ void	hook(void *param)
 		{
 			t_ray ray;
 			ray.origin = data->scene->camera.v_position;
-			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world, data->scene->camera.rays[y][x], 1);
+			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world,\
+												data->scene->camera.rays[y][x], 1);
+			//printf("x%lf y%lf z%lf", ray.direction.x, ray.direction.y, ray.direction.z);
+
 			double t = INFINITY;
-			t_object *obj =  obj_get_nearest(data->scene->objects, ray, &t);
+			t_plane	plane;
+			plane.color = (t_color){50,50,150};
+			plane.normal_vec = (t_vec3){1,0,0};
+			plane.position = (t_vec3){0,0,140};
+			//t_object *obj =  obj_get_nearest(data->scene->objects, ray, &t);
+			if(get_plane_intersect(plane, t_ray ray);
 			if (!obj)
-				put_color_pixel(data, x, y, (t_color){125,0,0});	
+				put_color_pixel(data, x, y, (t_color){170,255,204});	
 			else if (obj)
 			{
 				// printf("hit somehting %f\n", t);
@@ -116,10 +126,10 @@ void	hook(void *param)
 			}
 			x++;
 		}
-			printf("llop");
+			// printf("");
 		y++;
 	}
-	printf("%f\n", 1 / data->mlx->delta_time);
+	//printf("%f\n", 1 / data->mlx->delta_time);
 }
 
 
@@ -153,9 +163,10 @@ int	main(int argc, char **argv)
 	ray.origin.y = 0;
 	ray.origin.z = 0;
 	ray.direction = (t_vec3) {0, 1, 1};
-	double t = get_cylinder_intersect(ft_objat(data->scene->objects, 2)->cylinder, ray);
-	printf("t %f\n", t);
-	print_vec3(vec3_mult(t, ray.direction));
+	//double t = get_cylinder_intersect(ft_objat(data->scene->objects, 2)->cylinder, ray);
+	//exit (0);
+	//printf("t %f\n", t);
+	//print_vec3(vec3_mult(t, ray.direction));
 	// return 1;
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false);
 	if (!data->mlx)
