@@ -54,7 +54,7 @@ double	get_disk_intersect(t_plane *plane, t_ray ray, double radius)
 	distancevector = vec3_sub(plane->position, hitpoint);
 	dist = vec3_length(distancevector);
 	if (dist <= radius)
-
+		return (t);
 	else
 		return (-1.0L);
 }

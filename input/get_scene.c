@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/11/25 18:03:52 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:28:18 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,25 +154,33 @@ int	load_ambient(char *line, t_ambient *ambient)
 }
 
 
-int	set_cam_rays(t_vec3 rays[HEIGHT][WIDTH])
+int	set_cam_rays(int fov, t_vec3 rays[HEIGHT][WIDTH])
 {
 	int		x;
 	int		y;
 	t_vec3	ray;
-	double	xratio;
-	double	yratio;
+	double	xstep;
+	double	ystep;
+	double	screenratio;
 
+	screenratio = (double) WIDTH / (double) HEIGHT;
 	y = 0;
-	xratio = 1.0L / WIDTH;
-	yratio = 1.0L / HEIGHT;
+	if (!fov)
+		return (0);
+	double width = screenratio * tan(M_PI / 180.0L * (fov / 2));
+	xstep = width / WIDTH;
+	ystep = 1.0L / HEIGHT;
+	printf("width %f\n", width);
+	printf("xstep %f\n", xstep);
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while(x < WIDTH)
 		{
-			ray.x = -0.5 + x * xratio + 0.5 * xratio;
-			ray.y = 0.5 - y * yratio - 0.5 * yratio;
+			ray.x = - width / 2.0L + x * xstep + 0.5 * xstep;
+			ray.y = 0.5 - y * ystep - 0.5 * ystep;
 			ray.z = 1;
+			// print_vec3(ray);
 			vec3_normalize(&ray);
 			rays[y][x] = ray;
 			x++;
@@ -196,7 +204,7 @@ int	load_camera(char *line, t_camera *camera)
 	if (camera->v_direction.x == INFINITY && free_split(fields))
 		return (0);
 	camera->fov = ft_atod(fields[3]);
-	set_cam_rays(camera->rays);
+	set_cam_rays(camera->fov, camera->rays);
 	camera->m_camera_world = object_to_world(camera->v_direction, camera->v_position);
 	invert_matrix(camera->m_camera_world.m, camera->m_world_camera.m);
 	if (!d_nearly_equal(1.0L, vec3_dot(camera->v_direction, camera->v_direction))
