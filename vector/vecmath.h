@@ -1,6 +1,6 @@
 #ifndef VECMATH_H
 # define VECMATH_H
-# define EPSILON 0.00001
+# define EPSILON 0.0001
 #include <math.h>
 
 typedef struct  s_matrix4x4

@@ -15,7 +15,7 @@ static	double cylinder_check_limit(t_cylinder *cylinder, t_ray l_ray, double t)
 
 static	double cylinder_body_equation(t_cylinder *cylinder, t_ray l_ray)
 {
-	double	solution[3];
+	double	solution[2];
 	double	a;
 	double	b; 
 	double	c;
@@ -27,13 +27,16 @@ static	double cylinder_body_equation(t_cylinder *cylinder, t_ray l_ray)
 	if (discriminant < 0)
 		return (-1.0L);
 	 // Zmin < Z < Zmax 
-	solution[0] = (- b - sqrt(discriminant)) / (2.0 * a);
-	solution[1] = (- b + sqrt(discriminant)) / (2.0 * a);
+
+	solution[0] = (-b - sqrt(discriminant)) / (2.0 * a);
+	solution[1] = (-b + sqrt(discriminant)) / (2.0 * a);
 	if (solution[0] < 0.0L)
-		solution[2] = solution[1];
-	else
-		solution[2] = solution[0];
-	return (cylinder_check_limit(cylinder, l_ray, solution[2]));
+	{
+		if (solution[1] < 0.0L)
+			return (-1.0L);
+		return (cylinder_check_limit(cylinder, l_ray, solution[1]));
+	}
+	return (cylinder_check_limit(cylinder, l_ray, solution[0]));
 }
 
 
@@ -51,10 +54,7 @@ double	get_disk_intersect(t_plane *plane, t_ray ray, double radius)
 	distancevector = vec3_sub(plane->position, hitpoint);
 	dist = vec3_length(distancevector);
 	if (dist <= radius)
-	{
 
-		return (t);
-	}
 	else
 		return (-1.0L);
 }
@@ -70,24 +70,18 @@ double	get_cylinder_intersect(t_cylinder *cylinder, t_ray ray)
 
 	l_ray.direction = vec3_matrix_mult(cylinder->m_to_cylinder, ray.direction, 1);
 	l_ray.origin = vec3_matrix_mult(cylinder->m_to_cylinder, ray.origin, 0);
-	top_cap.normal_vec = cylinder->position;
+	top_cap.normal_vec = vec3_matrix_mult(cylinder->m_to_cylinder, cylinder->orientation, 1);
 	top_cap.position = (t_vec3) {0, 0, cylinder->height / 2};
-	bottom_cap.normal_vec = cylinder->position;
+	bottom_cap.normal_vec = vec3_matrix_mult(cylinder->m_to_cylinder, cylinder->orientation, 0);
 	bottom_cap.position = (t_vec3) {0, 0, -cylinder->height / 2};
 	t1 = get_disk_intersect(&top_cap, l_ray, cylinder->diameter / 2.0L);
 	t2 = get_disk_intersect(&bottom_cap, l_ray, cylinder->diameter / 2.0L);
 	t3 = cylinder_body_equation(cylinder, l_ray);
 	if (t1 >= 0 && (t2 == -1.0L || t1 <= t2) && (t3 == -1.0L || t1 <= t3))
-	{
 		return (t1);
-	}
-	if (t2 >= 0 && (t3 == -1.0L || t1 <= t3) && (t1 == -1.0L || t2 <= t1))
-	{
+	if (t2 >= 0 && (t3 == -1.0L || t2 <= t3) && (t1 == -1.0L || t2 <= t1))
 		return (t2);
-	}
 	else if (t3 >= 0)
-	{
 		return (t3);
-	}
 	return (-1.0L);
 }

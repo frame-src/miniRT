@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/28 14:58:03 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:34:31 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 double	get_sphere_intersect( t_sphere *sphere, t_ray ray)
 {
+	double res1;
+	double res2;
+
 	t_vec3 oc = vec3_sub(ray.origin, sphere->position);
 	double A = 1.0f;
 	double B = 2.0 * vec3_dot(oc, ray.direction);
@@ -21,9 +24,15 @@ double	get_sphere_intersect( t_sphere *sphere, t_ray ray)
 	double discriminant = B * B - 4 * A * C;
 	if (discriminant < 0)
 		return (-1.0);
-	if ((-B - sqrt(discriminant)) / (2.0 * A) < 0.0L)
-		return (-B + sqrt(discriminant)) / (2.0 * A);
-	return (-B - sqrt(discriminant)) / (2.0 * A);
+	res1 = (-B - sqrt(discriminant)) / (2.0 * A);
+	res2 = (-B + sqrt(discriminant)) / (2.0 * A);
+	if (res1 < 0.0L)
+	{
+		if (res2 < 0.0L)
+			return (-1.0L);
+		return (res2);
+	}
+	return (res1);
 }
 
 double	get_plane_intersect( t_plane *plane, t_ray ray)
@@ -35,7 +44,7 @@ double	get_plane_intersect( t_plane *plane, t_ray ray)
 	
 	vec3_normalize(&ray.direction);
 	denom = vec3_dot(plane->normal_vec, ray.direction);
-	if (denom > fabs(EPSILON))
+	if (fabs(denom) > EPSILON)
 	{
 		tmp = vec3_sub(plane->position, ray.origin);
 		nom = vec3_dot(tmp, plane->normal_vec);
