@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:58:26 by marius            #+#    #+#             */
-/*   Updated: 2022/11/25 17:47:44 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:02:25 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,4 +149,8 @@ int invert_matrix(const double m[16], double invOut[16])
     for (i = 0; i < 16; i++)
         invOut[i] = inv[i] * det;
     return 1;
+}
+
+double to_degrees(double radians) {
+    return radians * (180.0 / M_PI);
 }

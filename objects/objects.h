@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/11/26 23:13:10 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:31:58 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include <stdio.h>
 #include "../vector/vecmath.h"
 
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 2600
+# define HEIGHT 900
 
 typedef struct  s_ray
 {
