@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/11/28 18:48:35 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:52:06 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdio.h>
 #include "../vector/vecmath.h"
 
-# define WIDTH 2600
+# define WIDTH 1600
 # define HEIGHT 900
 
 typedef struct  s_ray
@@ -102,8 +102,9 @@ typedef struct s_scene
 }				t_scene;
 
 t_matrix4x4	object_to_world(t_vec3 v_direction, t_vec3 v_position);
-t_ray	get_light_ray(double t, t_ray *ray, t_scene *scene);
 //print
 void	print_ray(t_ray ray);
 int		print_scene(t_scene *scene);
+t_vec3	get_obj_position(t_object *obj);
+t_vec3 get_surface_normal(t_object *obj, t_vec3 hitpoint, t_light *light);
 #endif

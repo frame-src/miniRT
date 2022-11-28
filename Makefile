@@ -16,9 +16,9 @@ utilitysources=long_atoi.c ft_isalpha.c ft_split.c ft_strlen.c ft_strcmp.c ft_su
 
 vectorsources=vecoperations1.c vecoperations2.c vecoperations3.c print_utils.c\
 
-rendersources=main.c obj_intersection.c light_ray.c cylinder_intersection.c color_calcs.c\
+rendersources=main.c obj_intersection.c light_ray.c cylinder_intersection.c color_calcs.c move_by_vec_ratio.c\
 
-objectsources=object_matrix.c print_objects.c\
+objectsources=object_matrix.c print_objects.c get_obj_position.c get_surface_normal.c\
 
 inputsourcespath=$(addprefix ./input/, $(inputsources))
 utilitsourcesspath=$(addprefix ./utility/, $(utilitysources))

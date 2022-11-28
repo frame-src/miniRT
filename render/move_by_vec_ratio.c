@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_calcs.c                                      :+:      :+:    :+:   */
+/*   move_by_vec_ratio.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 18:41:03 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/28 21:22:06 by mawinter         ###   ########.fr       */
+/*   Created: 2022/11/28 19:51:49 by mawinter          #+#    #+#             */
+/*   Updated: 2022/11/28 19:56:52 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../objects/objects.h"
 
-t_color color_add(t_color base, t_color addon)
+t_vec3	move_by_vec_ratio(t_vec3 pos, double t, t_vec3 along)
 {
-	t_color	newcolor;
+	t_vec3 newvec;
 
-	newcolor.r = base.r + addon.r;	
-	newcolor.g = base.g + addon.g;	
-	newcolor.b = base.b + addon.b;	
-	return (newcolor);
-}
-
-t_color	color_mult_ratio(t_color color, double ratio)
-{
-	t_color newcolor;
-
-	newcolor.r = color.r * ratio;
-	newcolor.g = color.g * ratio;
-	newcolor.b = color.b * ratio;
-	return (newcolor);
+	newvec = vec3_add(pos, vec3_mult(t, along));
+	return (newvec);
 }

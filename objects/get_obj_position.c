@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_calcs.c                                      :+:      :+:    :+:   */
+/*   get_obj_position.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 18:41:03 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/28 21:22:06 by mawinter         ###   ########.fr       */
+/*   Created: 2022/11/28 19:43:18 by mawinter          #+#    #+#             */
+/*   Updated: 2022/11/28 19:44:49 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../objects/objects.h"
+#include "objects.h"
 
-t_color color_add(t_color base, t_color addon)
+t_vec3	get_obj_position(t_object *obj)
 {
-	t_color	newcolor;
-
-	newcolor.r = base.r + addon.r;	
-	newcolor.g = base.g + addon.g;	
-	newcolor.b = base.b + addon.b;	
-	return (newcolor);
-}
-
-t_color	color_mult_ratio(t_color color, double ratio)
-{
-	t_color newcolor;
-
-	newcolor.r = color.r * ratio;
-	newcolor.g = color.g * ratio;
-	newcolor.b = color.b * ratio;
-	return (newcolor);
+	if (obj->type == 's')
+		return (obj->sphere->position);
+	if (obj->type == 'p')
+		return (obj->plane->position);
+	if (obj->type == 'c')
+		return (obj->cylinder->position);
+	printf("No object Found");
+	return ((t_vec3) {0,0,0});
 }

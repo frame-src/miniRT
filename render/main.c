@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/28 18:58:50 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 22:07:23 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,26 +103,37 @@ void	hook(void *param)
 			//printf("x%lf y%lf z%lf", ray.direction.x, ray.direction.y, ray.direction.z);
 
 			double t = INFINITY;
-
 			t_object *obj =  obj_get_nearest(data->scene->objects, ray, &t);
 			if (!obj)
 				put_color_pixel(data, x, y, data->scene->ambient_l.ratiocolor);	
 			else if (obj)
 			{
+			// t_hitinfo;
 				// printf("hit somehting %f\n", t);
 				//calc point
 				// vector from potint to light
-				light_ray = get_light_ray(t, &ray, data->scene);
+				light_ray = get_light_ray(t, &ray, data->scene, obj);
 				double tnew = INFINITY;
 				t_object *newobj =  obj_get_nearest(data->scene->objects, light_ray, &tnew);
 				if(!newobj)
 				{
 					// t_color newcolor;
-					// newcolor.r = color_of_object(obj)
-					put_color_pixel(data, x, y, (t_color) {0,0,0});
+					// newcolor.r = color_of_object(obj)color_of_object(obj)
+					put_color_pixel(data, x, y, color_of_object(obj));
 				}
 				else
-					put_color_pixel(data, x, y, color_of_object(obj));
+				{
+					// double dist;
+					// t_vec3 hitpoint = vec3_add(ray.origin, vec3_mult(tnew, ray.direction));
+					// t_vec3 surfacenormal = get_surface_normal(newobj, hitpoint);
+					// hitpoint = move_by_vec_ratio(hitpoint, EPSILON, surfacenormal);
+					// t_vec3	distancevector = vec3_sub(get_obj_position(newobj), hitpoint);
+					// dist = vec3_length(distancevector);
+					// if (fabs(tnew) >= EPSILON)		
+						put_color_pixel(data, x, y, (t_color) {0,0,0});
+					// else
+						// put_color_pixel(data, x, y,color_of_object(obj));
+				}
 			}
 			x++;
 		}
