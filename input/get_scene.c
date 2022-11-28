@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/11/28 18:28:18 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:38:50 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,10 +168,10 @@ int	set_cam_rays(int fov, t_vec3 rays[HEIGHT][WIDTH])
 	if (!fov)
 		return (0);
 	double width = screenratio * tan(M_PI / 180.0L * (fov / 2));
+	if (fov == 180)
+		width = 1000;
 	xstep = width / WIDTH;
 	ystep = 1.0L / HEIGHT;
-	printf("width %f\n", width);
-	printf("xstep %f\n", xstep);
 	while (y < HEIGHT)
 	{
 		x = 0;
