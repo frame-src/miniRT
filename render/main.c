@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/27 00:49:33 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:54:22 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,14 @@ void	hook(void *param)
 			//printf("x%lf y%lf z%lf", ray.direction.x, ray.direction.y, ray.direction.z);
 
 			double t = INFINITY;
-			t_plane	plane;
-			plane.color = (t_color){50,50,150};
-			plane.normal_vec = (t_vec3){1,0,0};
-			plane.position = (t_vec3){0,0,140};
-			//t_object *obj =  obj_get_nearest(data->scene->objects, ray, &t);
-			if(get_plane_intersect(plane, t_ray ray);
+			// t_plane	plane;
+			// plane.color = (t_color){50,50,150};
+			// plane.normal_vec = (t_vec3){1,0,0};
+			// plane.position = (t_vec3){0,0,140};
+			t_object *obj =  obj_get_nearest(data->scene->objects, ray, &t);
+			// if(get_plane_intersect(plane, t_ray ray);
 			if (!obj)
-				put_color_pixel(data, x, y, (t_color){170,255,204});	
+				put_color_pixel(data, x, y, (t_color){0,255,0});	
 			else if (obj)
 			{
 				// printf("hit somehting %f\n", t);

@@ -1,4 +1,17 @@
 #include "render.h"
+/*
+	checking the body of the cylinder; 
+
+*/
+static	double cylinder_check_limit(t_cylinder *cylinder, t_ray l_ray, double t)
+{
+	double		limits;
+
+	limits = l_ray.origin.z + l_ray.direction.z * t;
+	if(limits <= cylinder->height/2 && limits >=  -1 * cylinder->height/2)
+		return (t);
+	return -1;
+}
 
 static	double cylinder_body_equation(t_cylinder *cylinder, t_ray l_ray)
 {
@@ -20,49 +33,52 @@ static	double cylinder_body_equation(t_cylinder *cylinder, t_ray l_ray)
 		solution[2] = solution[1];
 	else
 		solution[2] = solution[0];
-	return solution[2];
+	return (cylinder_check_limit(cylinder, l_ray, solution[2]));
 }
-/*
-	checking the body of the cylinder; 
 
-*/
-static	double cylinder_check_limit(t_cylinder *cylinder, t_ray l_ray, double t)
+
+double	get_disk_intersect(t_plane *plane, t_ray ray, double radius)
 {
-	double		limits;
-	t_plane		cap;
+	double	t;
+	double	dist;
+	t_vec3	hitpoint;
+	t_vec3	distancevector;
 
-	limits = l_ray.origin.z + l_ray.direction.z * t;
-	if(limits > l_ray.origin.z - cylinder->height/2 && limits < l_ray.origin.z + cylinder->height/2)
-	{
-		cap.normal_vec = cylinder->orientation;
-		cap.position = (t_vec3){0,0,l_ray.origin.z + cylinder->height/2};
-		cap.color = cylinder->color;
-		if(get_plane_intersect(&cap, l_ray) != -1)
-		{
-			t = ((l_ray.origin.z + cylinder->height/2 - cylinder->position.z)/cylinder->orientation.z);
-			return (get_plane_intersect(&cap, l_ray));
-		}
-		cap.position = (t_vec3){0,0,l_ray.origin.z - cylinder->height/2};
-		if(get_plane_intersect(&cap, l_ray) != -1)
-		{
-			t = ((l_ray.origin.z - cylinder->height/2 - cylinder->position.z)/cylinder->orientation.z);
-			return (get_plane_intersect(&cap, l_ray));
-		}
-	}
-	return t;
+	t = get_plane_intersect(plane, ray);
+	if (t == -1)
+		return (-1);
+	hitpoint = vec3_add(ray.direction, vec3_mult(t, ray.direction));
+	distancevector = vec3_sub(plane->position, hitpoint);
+	dist = vec3_length(distancevector);
+	if (dist <= radius)
+		return (t);
+	else
+		return (-1.0L);
 }
 
 double	get_cylinder_intersect(t_cylinder *cylinder, t_ray ray)
 {
 	t_ray		l_ray;
-	double		t;
+	double		t1;
+	double		t2;
+	double		t3;
+	t_plane		top_cap;
+	t_plane		bottom_cap;
 
 	l_ray.direction = vec3_matrix_mult(cylinder->m_to_cylinder, ray.direction, 1);
 	l_ray.origin = vec3_matrix_mult(cylinder->m_to_cylinder, ray.origin, 0);
-	t = cylinder_body_equation(cylinder, l_ray);
-	if(t == -1)
-		return(t);
-	else
-		t = cylinder_check_limit(cylinder, l_ray, t);
-	return t;
+	top_cap.normal_vec = cylinder->position;
+	top_cap.position = (t_vec3) {0, 0, cylinder->height / 2};
+	bottom_cap.normal_vec = cylinder->position;
+	bottom_cap.position = (t_vec3) {0, 0, -cylinder->height / 2};
+	t1 = get_disk_intersect(&top_cap, ray, cylinder->diameter / 2.0L);
+	t2 = get_disk_intersect(&bottom_cap, ray, cylinder->diameter / 2.0L);
+	t3 = cylinder_body_equation(cylinder, l_ray);
+	if (t1 != - 1 && t1 < t2 && t2 < t3)
+		return (t1);
+	else if (t2 != - 1 && t2 < t3 && t3 < t1)
+		return (t2);
+	else if (t3 != - 1)
+		return (t3);
+	return (-1.0L);
 }

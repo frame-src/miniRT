@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_intersection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/26 23:39:45 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:53:38 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ double	get_plane_intersect( t_plane *plane, t_ray ray)
 	double	nom;
 	t_vec3	tmp;
 	
+	vec3_normalize(&ray.direction);
 	denom = vec3_dot(plane->normal_vec, ray.direction);
-	if (denom != 0)
+	if (denom > fabs(EPSILON))
 	{
 		tmp = vec3_sub(plane->position, ray.origin);
 		nom = vec3_dot(tmp, plane->normal_vec);
@@ -42,7 +43,7 @@ double	get_plane_intersect( t_plane *plane, t_ray ray)
 		return (nom / denom);
 	}
 	else
-		return (-1);
+			return (-1.0L);
 }
 
 
@@ -55,7 +56,7 @@ t_object *obj_get_nearest(t_object *list, t_ray ray, double *t)
 
 	head = list;
 	idx = 0;
-	minidx = 0;
+	minidx = -1;
 	tmp = -1.0L;
 	// printf("START\n");
 	while (list)
@@ -91,6 +92,8 @@ t_object *obj_get_nearest(t_object *list, t_ray ray, double *t)
 		idx++;
 		list = list->next;
 	}
+	if (minidx == -1)
+		return (NULL);
 	return (ft_objat(head, minidx));
 }
 
