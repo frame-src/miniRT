@@ -1,3 +1,9 @@
+
+November 28 2022
+
+>	phong illumination?
+	https://www.scratchapixel.com/lessons/3d-basic-rendering/phong-shader-BRDF
+
 November 25 2022
 
 >	added plane intersection:
