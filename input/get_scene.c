@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/11/28 18:38:50 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:49:47 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,9 @@ int	load_ambient(char *line, t_ambient *ambient)
 	ambient->color = get_color_field(fields[2]);
 	if (ambient->color.r == -1.0L && free_split(fields))
 		return (0);
+	ambient->ratiocolor.r = ambient->color.r * ambient->ratio;
+	ambient->ratiocolor.g = ambient->color.g * ambient->ratio;
+	ambient->ratiocolor.b = ambient->color.b * ambient->ratio;
 	free_split(fields);
 	return (1);
 }

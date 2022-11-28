@@ -16,7 +16,7 @@ utilitysources=long_atoi.c ft_isalpha.c ft_split.c ft_strlen.c ft_strcmp.c ft_su
 
 vectorsources=vecoperations1.c vecoperations2.c vecoperations3.c print_utils.c\
 
-rendersources=main.c obj_intersection.c ray_cast.c cylinder_intersection.c\
+rendersources=main.c obj_intersection.c light_ray.c cylinder_intersection.c color_calcs.c\
 
 objectsources=object_matrix.c print_objects.c\
 

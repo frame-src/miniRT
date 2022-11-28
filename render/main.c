@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/28 13:54:22 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:58:50 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	hook(void *param)
 	int 	y;
 	int 	x;
 	t_color	color;
-	// t_ray	newray;
+	t_ray	light_ray;
 
 	color.r = 0; color.g = 0; color.b = 255;
 	data = param;
@@ -103,26 +103,26 @@ void	hook(void *param)
 			//printf("x%lf y%lf z%lf", ray.direction.x, ray.direction.y, ray.direction.z);
 
 			double t = INFINITY;
-			// t_plane	plane;
-			// plane.color = (t_color){50,50,150};
-			// plane.normal_vec = (t_vec3){1,0,0};
-			// plane.position = (t_vec3){0,0,140};
+
 			t_object *obj =  obj_get_nearest(data->scene->objects, ray, &t);
-			// if(get_plane_intersect(plane, t_ray ray);
 			if (!obj)
-				put_color_pixel(data, x, y, (t_color){0,255,0});	
+				put_color_pixel(data, x, y, data->scene->ambient_l.ratiocolor);	
 			else if (obj)
 			{
 				// printf("hit somehting %f\n", t);
 				//calc point
 				// vector from potint to light
-				// newray = light_ray(t, &ray,data->scene);
-				// t_object *obj =  obj_get_nearest(data->scene->objects, newray, &t);
-				// if(!obj && t < 0.0L)				
-				// 	put_color_pixel(data, x, y, color_of_object(obj));
-				// else
+				light_ray = get_light_ray(t, &ray, data->scene);
+				double tnew = INFINITY;
+				t_object *newobj =  obj_get_nearest(data->scene->objects, light_ray, &tnew);
+				if(!newobj)
+				{
+					// t_color newcolor;
+					// newcolor.r = color_of_object(obj)
+					put_color_pixel(data, x, y, (t_color) {0,0,0});
+				}
+				else
 					put_color_pixel(data, x, y, color_of_object(obj));
-
 			}
 			x++;
 		}

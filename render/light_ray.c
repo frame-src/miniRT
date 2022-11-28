@@ -5,7 +5,7 @@
 // 	origin_set();
 // }
 
-t_ray	light_ray(double t, t_ray *ray, t_scene *scene)
+t_ray	get_light_ray(double t, t_ray *ray, t_scene *scene)
 {
 	t_ray	light_ray;
 

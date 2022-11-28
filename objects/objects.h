@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/11/28 18:31:58 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:48:35 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_ambient
 {
 	double		ratio;
 	t_color	color;
+	t_color	ratiocolor;
 }				t_ambient;
 
 typedef struct s_camera
@@ -101,7 +102,7 @@ typedef struct s_scene
 }				t_scene;
 
 t_matrix4x4	object_to_world(t_vec3 v_direction, t_vec3 v_position);
-
+t_ray	get_light_ray(double t, t_ray *ray, t_scene *scene);
 //print
 void	print_ray(t_ray ray);
 int		print_scene(t_scene *scene);
