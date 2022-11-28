@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/28 13:53:38 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/28 14:58:03 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ double	get_plane_intersect( t_plane *plane, t_ray ray)
 		return (nom / denom);
 	}
 	else
-			return (-1.0L);
+		return (-1.0L);
 }
 
 
