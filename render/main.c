@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/29 19:56:25 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:45:38 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	hook(void *param)
 					put_color_pixel(data, x, y, (t_color) {0,0,0});
 				}
 				else
-				{
-					put_color_pixel(data, x, y, color_of_object(hit_record.object));
+				{					
+					put_color_pixel(data, x, y, color_mult_ratio(color_of_object(hit_record.object), cos(vec3_dot(light_ray.direction, hit_record.normal))));
 				}
 			}
 			++x;
