@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/29 18:42:57 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:39:25 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	hook(void *param)
 		{
 
 			ray.origin = data->scene->camera.v_position;
-			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world,\
+			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world,
 												data->scene->camera.rays[y][x], 1);
 			hit_record.t = INFINITY;
 			obj_get_nearest(&hit_record, data->scene->objects, ray);
@@ -64,8 +64,6 @@ void	hook(void *param)
 				put_color_pixel(data, x, y, data->scene->ambient_l.ratiocolor);	
 			else if (hit_record.object)
 			{
-				if (hit_record.object->type == 's')
-					printf("sphere\n");
 				light_ray = get_light_ray(hit_record, &ray, data->scene);
 				obj_get_nearest(&new_hit, data->scene->objects, light_ray);
 				if(new_hit.object)
