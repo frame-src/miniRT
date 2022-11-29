@@ -87,7 +87,7 @@ void	get_cylinder_intersect(t_hit_info *hit_record, t_cylinder *cylinder, t_ray 
 	l_ray.origin = vec3_matrix_mult(cylinder->m_to_cylinder, ray.origin, 0);
 	top_cap.normal_vec = vec3_matrix_mult(cylinder->m_to_cylinder, cylinder->orientation, 1);
 	top_cap.position = (t_vec3) {0, 0, cylinder->height / 2};
-	bottom_cap.normal_vec = vec3_matrix_mult(cylinder->m_to_cylinder, cylinder->orientation, 0);
+	bottom_cap.normal_vec = vec3_matrix_mult(cylinder->m_to_cylinder, cylinder->orientation, 1);
 	bottom_cap.position = (t_vec3) {0, 0, -cylinder->height / 2};
 	t1 = get_disk_intersect(hit_record, &top_cap, l_ray, cylinder->diameter / 2.0L);
 	t2 = get_disk_intersect(hit_record, &bottom_cap, l_ray, cylinder->diameter / 2.0L);
@@ -104,7 +104,6 @@ void	get_cylinder_intersect(t_hit_info *hit_record, t_cylinder *cylinder, t_ray 
 		norm_set_hit_record(hit_record, ray, cylinder->orientation);
 		return ;
 	}
-
 	else if (t3 >= 0)
 	{
 		hit_record->t = t3;

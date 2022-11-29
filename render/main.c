@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/29 20:45:38 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/29 21:47:59 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	hook(void *param)
 
 			obj_get_nearest(&hit_record, data->scene->objects, ray);
 			if (!hit_record.object)
-				put_color_pixel(data, x, y, data->scene->ambient_l.ratiocolor);	
+				put_color_pixel(data, x, y,  (t_color) {0,0,0});	
 			else if (hit_record.object)
 			{
 				light_ray = get_light_ray(hit_record, &ray, data->scene);
@@ -73,8 +73,11 @@ void	hook(void *param)
 					put_color_pixel(data, x, y, (t_color) {0,0,0});
 				}
 				else
-				{					
-					put_color_pixel(data, x, y, color_mult_ratio(color_of_object(hit_record.object), cos(vec3_dot(light_ray.direction, hit_record.normal))));
+				{
+					double nom = vec3_dot(light_ray.direction, hit_record.normal);
+					double denom = vec3_length(light_ray.direction);
+					double res =(nom / denom);
+					put_color_pixel(data, x, y, color_mult_ratio(color_of_object(hit_record.object), res));
 				}
 			}
 			++x;

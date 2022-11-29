@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/11/28 18:49:47 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/29 21:44:07 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,6 @@ int	set_cam_rays(int fov, t_vec3 rays[HEIGHT][WIDTH])
 			ray.x = - width / 2.0L + x * xstep + 0.5 * xstep;
 			ray.y = 0.5 - y * ystep - 0.5 * ystep;
 			ray.z = 1;
-			// print_vec3(ray);
 			vec3_normalize(&ray);
 			rays[y][x] = ray;
 			x++;
