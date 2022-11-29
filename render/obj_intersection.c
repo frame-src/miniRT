@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/29 19:07:00 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:22:04 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	obj_get_nearest(t_hit_info *hit_record, t_object *cur_obj, t_ray ray)
 	head = cur_obj;
 	index = 0;
 	minimum_index = -1;
-	tmp_record.t = -1;
 	while (cur_obj)
 	{
+		tmp_record.t = -1;
 		if (cur_obj->type == 's')
 		{
 			tmp_record.object = cur_obj;
