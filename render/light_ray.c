@@ -6,15 +6,13 @@
 // 	origin_set();
 // }
 
-t_ray	get_light_ray(double t, t_ray *ray, t_scene *scene, t_object *cur_obj)
+t_ray	get_light_ray(t_hit_info hit_record, t_ray *ray, t_scene *scene)
 {
-	t_vec3 surfacenormal;
 	t_vec3 hitpoint;
 	t_ray light_ray;
 
-	hitpoint = vec3_add(ray->origin, vec3_mult(t, ray->direction));
-	surfacenormal = get_surface_normal(cur_obj, hitpoint, &scene->light);
-	hitpoint = move_by_vec_ratio(hitpoint, EPSILON, surfacenormal);
+	hitpoint = vec3_add(ray->origin, vec3_mult(hit_record.t, ray->direction));
+	hitpoint = move_by_vec_ratio(hitpoint, EPSILON, hit_record.normal);
 
 	light_ray.origin = hitpoint;
 	light_ray.direction = vec3_sub(scene->light.position, hitpoint);

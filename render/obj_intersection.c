@@ -3,106 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   obj_intersection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/28 19:37:46 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:21:07 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-double	get_sphere_intersect( t_sphere *sphere, t_ray ray)
+void	get_sphere_intersect(t_hit_info *hit_rec, t_sphere *sphere, t_ray ray)
 {
-	double res1;
-	double res2;
+	double solution[2];
 
-	t_vec3 oc = vec3_sub(ray.origin, sphere->position);
+	t_vec3 oc = vec3_sub(sphere->position, ray.origin);
 	double A = 1.0f;
 	double B = 2.0 * vec3_dot(oc, ray.direction);
 	double C = vec3_dot(oc, oc) - (sphere->radius) * (sphere->radius);
 	double discriminant = B * B - 4 * A * C;
 	if (discriminant < 0)
-		return (-1.0);
-	res1 = (-B - sqrt(discriminant)) / (2.0 * A);
-	res2 = (-B + sqrt(discriminant)) / (2.0 * A);
-	if (res1 < 0.0L)
 	{
-		if (res2 < 0.0L)
-			return (-1.0L);
-		return (res2);
+		hit_rec->t = -1.0L;
+			return ;
 	}
-	return (res1);
+	solution[0] = (-B - sqrt(discriminant)) / (2.0 * A);
+	solution[1] = (-B + sqrt(discriminant)) / (2.0 * A);
+	norm_set_hit_record(&hit_rec, ray, oc);
+	if (solution[0] < 0.0L)
+	{
+		if (solution[1] < 0.0L)
+		{
+			hit_rec->t = -1.0L;
+			return ;
+		}
+		hit_rec->t = solution[1];
+		return ;
+	}
+	hit_rec->t = solution[0];
 }
 
-double	get_plane_intersect( t_plane *plane, t_ray ray)
+void	get_plane_intersect(t_hit_info *hit_rec, t_plane *plane, t_ray ray)
 {
-	//are the value already normalized?
 	double	denom;
 	double	nom;
 	t_vec3	tmp;
-	
+
 	vec3_normalize(&ray.direction);
 	denom = vec3_dot(plane->normal_vec, ray.direction);
 	if (fabs(denom) > EPSILON)
 	{
 		tmp = vec3_sub(plane->position, ray.origin);
 		nom = vec3_dot(tmp, plane->normal_vec);
-		// printf("plane: t: %f\n", nom / denom);
-		return (nom / denom);
+		hit_rec->t = (nom / denom);
+		norm_set_hit_record(&hit_rec, ray, plane->normal_vec);
+		return;
 	}
-	else
-		return (-1.0L);
+	hit_rec->t = -1.0L;
 }
 
-
-t_object *obj_get_nearest(t_object *list, t_ray ray, double *t)
+/*
+	iterator through the list;
+	store the index of the node with the smallest t;
+	return the object stored at the node[index];
+*/
+void	obj_get_nearest(t_hit_info *hit_record, t_object *cur_obj, t_ray ray)
 {
-	double		tmp;
-	int			idx;
-	int			minidx;
+	t_hit_info	tmp_record;
+	int			index;
+	int			minimum_index;
 	t_object	*head;
 
-	head = list;
-	idx = 0;
-	minidx = -1;
-	tmp = -1.0L;
-	// printf("START\n");
-	while (list)
+	head = cur_obj;
+	index = 0;
+	minimum_index = -1;
+	tmp_record.t = -1;
+	while (cur_obj)
 	{
-		// printf("type %c\n", list->type);
-		if (list->type == 's')
+		if (cur_obj->type == 's')
 		{
-			tmp = get_sphere_intersect(list->sphere, ray);
-			if (tmp >= 0.0L && tmp < *t)
+			tmp_record.object = cur_obj;
+			get_sphere_intersect(&tmp_record, cur_obj->sphere, ray);
+			if (tmp_record.t >= 0.0L && tmp_record.t < hit_record->t)
 			{
-				*t = tmp;
-				minidx = idx;
+				*hit_record = tmp_record;
+				minimum_index = index;
 			}
 		}
-		else if (list->type == 'p')
+		else if (cur_obj->type == 'p')
 		{
-			tmp = get_plane_intersect(list->plane, ray);
-			if (tmp >= 0.0L && tmp < *t)
+			tmp_record.object = cur_obj;
+			get_plane_intersect(&tmp_record, cur_obj->plane, ray);
+			if (tmp_record.t >= 0.0L && tmp_record.t < hit_record->t)
 			{
-				*t = tmp;
-				minidx = idx;
+				*hit_record = tmp_record;
+				minimum_index = index;
 			}
 		}
-		else if (list->type =='c')
+		else if (cur_obj->type =='c')
 		{
-			tmp = get_cylinder_intersect(list->cylinder, ray);
-			if (tmp >= 0.0L && tmp < *t)
+			tmp_record.object = cur_obj;
+			get_cylinder_intersect(&tmp_record, cur_obj->cylinder, ray);
+			if (tmp_record.t >= 0.0L && tmp_record.t < hit_record->t)
 			{
-				*t = tmp;
-				minidx = idx;
+				*hit_record = tmp_record;
+				minimum_index = index;
 			}
 		}
-		idx++;
-		list = list->next;
+		index++;
+		cur_obj = cur_obj->next;
 	}
-	if (minidx == -1)
-		return (NULL);
-	return (ft_objat(head, minidx));
+	if (minimum_index == -1)
+		hit_record->object = NULL;
 }
-
