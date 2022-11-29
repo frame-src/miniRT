@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/29 19:39:25 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:56:25 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	hook(void *param)
 			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world,
 												data->scene->camera.rays[y][x], 1);
 			hit_record.t = INFINITY;
+			new_hit.t = INFINITY;
+
 			obj_get_nearest(&hit_record, data->scene->objects, ray);
 			if (!hit_record.object)
 				put_color_pixel(data, x, y, data->scene->ambient_l.ratiocolor);	
