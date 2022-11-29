@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_intersection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/29 18:21:07 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:07:00 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	get_sphere_intersect(t_hit_info *hit_rec, t_sphere *sphere, t_ray ray)
 	if (discriminant < 0)
 	{
 		hit_rec->t = -1.0L;
-			return ;
+		return ;
 	}
 	solution[0] = (-B - sqrt(discriminant)) / (2.0 * A);
 	solution[1] = (-B + sqrt(discriminant)) / (2.0 * A);
-	norm_set_hit_record(&hit_rec, ray, oc);
+	// printf("SAD");
 	if (solution[0] < 0.0L)
 	{
 		if (solution[1] < 0.0L)
@@ -37,8 +37,10 @@ void	get_sphere_intersect(t_hit_info *hit_rec, t_sphere *sphere, t_ray ray)
 			return ;
 		}
 		hit_rec->t = solution[1];
+		norm_set_hit_record(hit_rec, ray, vec3_sub(vec3_add(ray.origin, vec3_mult(solution[1], ray.direction)), sphere->position));
 		return ;
 	}
+	norm_set_hit_record(hit_rec, ray, vec3_sub(vec3_add(ray.origin, vec3_mult(solution[0], ray.direction)), sphere->position));
 	hit_rec->t = solution[0];
 }
 
@@ -55,7 +57,7 @@ void	get_plane_intersect(t_hit_info *hit_rec, t_plane *plane, t_ray ray)
 		tmp = vec3_sub(plane->position, ray.origin);
 		nom = vec3_dot(tmp, plane->normal_vec);
 		hit_rec->t = (nom / denom);
-		norm_set_hit_record(&hit_rec, ray, plane->normal_vec);
+		norm_set_hit_record(hit_rec, ray, plane->normal_vec);
 		return;
 	}
 	hit_rec->t = -1.0L;
@@ -85,6 +87,7 @@ void	obj_get_nearest(t_hit_info *hit_record, t_object *cur_obj, t_ray ray)
 			get_sphere_intersect(&tmp_record, cur_obj->sphere, ray);
 			if (tmp_record.t >= 0.0L && tmp_record.t < hit_record->t)
 			{
+				printf("XXX\n");
 				*hit_record = tmp_record;
 				minimum_index = index;
 			}

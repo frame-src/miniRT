@@ -95,20 +95,20 @@ void	get_cylinder_intersect(t_hit_info *hit_record, t_cylinder *cylinder, t_ray 
 	if (t1 >= 0 && (t2 == -1.0L || t1 <= t2) && (t3 == -1.0L || t1 <= t3))
 	{
 		hit_record->t = t1;
-		norm_set_hit_record(&hit_record, ray, cylinder->orientation);
+		norm_set_hit_record(hit_record, ray, cylinder->orientation);
 		return ;
 	}
 	if (t2 >= 0 && (t3 == -1.0L || t2 <= t3) && (t1 == -1.0L || t2 <= t1))
 	{
 		hit_record->t = t2;
-		norm_set_hit_record(&hit_record, ray, cylinder->orientation);
+		norm_set_hit_record(hit_record, ray, cylinder->orientation);
 		return ;
 	}
 
 	else if (t3 >= 0)
 	{
 		hit_record->t = t3;
-		norm_set_hit_record(&hit_record, ray, cylinder_get_surface_normal(\
+		norm_set_hit_record(hit_record, ray, cylinder_get_surface_normal(\
 					cylinder, vec3_add(ray.origin, vec3_mult(t3, ray.direction))));
 		return ;
 	}

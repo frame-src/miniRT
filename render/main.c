@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/29 18:17:08 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:42:57 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 
 t_color	color_of_object(t_object *obj)
 {
+	// if (!obj)
+		// return ((t_color) {0,0,0});
 	if (obj->type == 's')
 		return (obj->sphere->color);
 	if (obj->type == 'p')
@@ -62,15 +64,17 @@ void	hook(void *param)
 				put_color_pixel(data, x, y, data->scene->ambient_l.ratiocolor);	
 			else if (hit_record.object)
 			{
+				if (hit_record.object->type == 's')
+					printf("sphere\n");
 				light_ray = get_light_ray(hit_record, &ray, data->scene);
 				obj_get_nearest(&new_hit, data->scene->objects, light_ray);
-				if(!new_hit.object)
+				if(new_hit.object)
 				{
-					put_color_pixel(data, x, y, color_of_object(new_hit.object));
+					put_color_pixel(data, x, y, (t_color) {0,0,0});
 				}
 				else
 				{
-					put_color_pixel(data, x, y, (t_color) {0,0,0});
+					put_color_pixel(data, x, y, color_of_object(hit_record.object));
 				}
 			}
 			++x;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:03:26 by marius            #+#    #+#             */
-/*   Updated: 2022/11/29 18:18:37 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:56:09 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ t_ray	get_light_ray(t_hit_info hit_record, t_ray *ray, t_scene *scene);
 t_color	color_mult_ratio(t_color color, double ratio);
 t_vec3	move_by_vec_ratio(t_vec3 pos, double t, t_vec3 along);
 t_color	color_add(t_color base, t_color addon);
-void	norm_set_hit_record(t_hit_info **hit_record, t_ray ray, t_vec3 norm);
+void norm_set_hit_record(t_hit_info *hit_record, t_ray ray, t_vec3 norm);
 
 # endif
