@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check_element2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:45:52 by mawinter          #+#    #+#             */
-/*   Updated: 2022/10/31 15:26:36 by marius           ###   ########.fr       */
+/*   Updated: 2022/11/30 12:33:13 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	valid_cylinder(char *line)
 {
 	char	**fields;
 
-	line[ft_strlen(line) -1] = '\0';
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
 	fields = ft_split(line, ' ');
 	if (!fields && write(2, MALLOC_FAIL, 19))
 		return (FALSE);

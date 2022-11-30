@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:43:57 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 17:51:28 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/11/30 12:33:09 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	valid_ambient(char *line)
 {
 	char	**fields;
 
-	line[ft_strlen(line) -1] = '\0';
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
 	fields = ft_split(line, ' ');
 	if (!fields && write(2, MALLOC_FAIL, 19))
 		return (FALSE);
@@ -37,7 +38,8 @@ int	valid_camera(char *line)
 {
 	char	**fields;
 
-	line[ft_strlen(line) -1] = '\0';
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
 	fields = ft_split(line, ' ');
 	if (!fields && write(2, MALLOC_FAIL, 19))
 		return (FALSE);
@@ -57,7 +59,8 @@ int	valid_light(char *line)
 {
 	char	**fields;
 
-	line[ft_strlen(line) -1] = '\0';
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
 	fields = ft_split(line, ' ');
 	if (!fields && write(2, MALLOC_FAIL, 19))
 		return (FALSE);
@@ -78,7 +81,8 @@ int	valid_sphere(char *line)
 {
 	char	**fields;
 
-	line[ft_strlen(line) -1] = '\0';
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
 	fields = ft_split(line, ' ');
 	if (!fields && write(2, MALLOC_FAIL, 19))
 		return (FALSE);
@@ -99,7 +103,8 @@ int	valid_plane(char *line)
 {
 	char	**fields;
 
-	line[ft_strlen(line) -1] = '\0';
+	if (line[ft_strlen(line) - 1] == '\n')
+		line[ft_strlen(line) - 1] = '\0';
 	fields = ft_split(line, ' ');
 	if (!fields && write(2, MALLOC_FAIL, 19))
 		return (FALSE);
