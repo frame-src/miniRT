@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 03:08:55 by marius            #+#    #+#             */
-/*   Updated: 2022/10/30 22:12:07 by marius           ###   ########.fr       */
+/*   Updated: 2022/12/09 11:26:39 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static double getfirst(char **field, double *sign)
+static double	getfirst(char **field, double *sign)
 {
-	double first;
+	double	first;
 
 	*sign = 1;
 	first = 0;
@@ -27,10 +27,10 @@ static double getfirst(char **field, double *sign)
 	return (first);
 }
 
-double   ft_atod(char *field)
+double	ft_atod(char *field)
 {
-    double	first;
-    double	second;
+	double	first;
+	double	second;
 	int		digits;
 	double	divisor;
 	double	sign;

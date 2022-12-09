@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_field.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 20:12:39 by marius            #+#    #+#             */
-/*   Updated: 2022/10/30 22:29:08 by marius           ###   ########.fr       */
+/*   Updated: 2022/12/09 11:33:39 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	fields_count(char **fields)
 {
 	int	len;
-	
+
 	len = 0;
 	while (fields[len])
 		len++;
@@ -24,7 +24,7 @@ int	fields_count(char **fields)
 
 int	valid_triple_field(char *field, double min, double max, int is_in)
 {
-	char **triple;
+	char	**triple;
 	int		i;
 
 	i = 0;
@@ -34,7 +34,7 @@ int	valid_triple_field(char *field, double min, double max, int is_in)
 	if (fields_count(triple) != 3 && write(2, NUM3, 35)
 		&& free_split(triple))
 		return (FALSE);
-	while(triple[i])
+	while (triple[i])
 	{
 		if (isnan(get_num(triple[i], min, max, is_in)) && free_split(triple))
 			return (FALSE);
@@ -44,11 +44,9 @@ int	valid_triple_field(char *field, double min, double max, int is_in)
 	return (TRUE);
 }
 
-
-double	ret_num(int *dotcount, char *field, double range[2], int is_int)
+double	ret_num(int *dotcount, char *field, double range[3], int is_int)
 {
-	double res;
-
+	double	res;
 
 	res = ft_atod(field);
 	if (is_int)
@@ -67,10 +65,10 @@ double	ret_num(int *dotcount, char *field, double range[2], int is_int)
 			return (NAN);
 		}
 	}
-	if(!in_range(res, range[0], range[1]))
+	if (!in_range(res, range[0], range[1]))
 	{
-			write(2, RANGE, 27);
-			return (NAN);
+		write(2, RANGE, 27);
+		return (NAN);
 	}
 	return (res);
 }
@@ -80,28 +78,29 @@ double	ret_num(int *dotcount, char *field, double range[2], int is_int)
 /*is_int = 1 -> integers only, 0 -> float*/
 double	get_num(char *field, double min, double max, int is_int)
 {
-	int	i;
-	int	dotcount;
-	double	range[2];
+	int		i;
+	double	range[3];
 
 	range[0] = min;
 	range[1] = max;
+	range[2] = 0;
 	i = -1;
-	dotcount = 0;
 	while (field[++i])
 	{
-		if ((!ft_isdigit(field[i]) && field[i] != '.' && field[i] != '-') && write(2, WRONG_CHAR, 23))
+		if ((!ft_isdigit(field[i]) && field[i] != '.'
+				&& field[i] != '-') && write(2, WRONG_CHAR, 23))
 			return (NAN);
-		if (field[i] == '.' && ++dotcount)
+		if (field[i] == '.' && ++range[2])
 		{
-			if (dotcount == 2)
+			if (range[2] == 2)
 				return (NAN);
 			if ((i == 0 || i == ft_strlen(field) - 1)
 				&& write(2, TRAIL_DECIMAL_POINT, 53))
 				return (NAN);
 		}
-		if (((field[i] == '-' && i != 0 )|| (field[i] == '-' && field[i + 1] == '.')) && write(2, MINUS_POS, 35))
-				return (NAN);
+		if (((field[i] == '-' && i != 0) || (field[i] == '-'
+					&& field[i + 1] == '.')) && write(2, MINUS_POS, 35))
+			return (NAN);
 	}
-	return (ret_num(&dotcount, field, range, is_int));
+	return (ret_num(&range[2], field, range, is_int));
 }

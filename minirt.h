@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:57:04 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/01 15:04:53 by marius           ###   ########.fr       */
+/*   Updated: 2022/12/09 11:25:11 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_data
 	mlx_image_t	*g_img;
 	t_scene		*scene;
 }				t_data;
-
 
 /*	input_check_elememt2.c	*/
 int				valid_cylinder(char *line);
