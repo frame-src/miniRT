@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/29 21:47:59 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:48:20 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	hook(void *param)
 		while (x < WIDTH)
 		{
 
-			ray.origin = data->scene->camera.v_position;
+			ray.origin = data->scene->camera.position;
 			ray.direction = vec3_matrix_mult(data->scene->camera.m_camera_world,
 												data->scene->camera.rays[y][x], 1);
 			hit_record.t = INFINITY;

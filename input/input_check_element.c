@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:43:57 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/30 12:33:09 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:28:45 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	valid_ambient(char *line)
 	return (TRUE);
 }
 
-
 int	valid_camera(char *line)
 {
 	char	**fields;
@@ -44,7 +43,7 @@ int	valid_camera(char *line)
 	if (!fields && write(2, MALLOC_FAIL, 19))
 		return (FALSE);
 	if (fields_count(fields) != 4 && free_split(fields)
-		&& write(2,C_WRONG_NUM_FIELDS, 38))
+		&& write(2, C_WRONG_NUM_FIELDS, 38))
 		return (FALSE);
 	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0))
 		return (FALSE);
@@ -76,7 +75,6 @@ int	valid_light(char *line)
 	return (TRUE);
 }
 
-
 int	valid_sphere(char *line)
 {
 	char	**fields;
@@ -98,7 +96,6 @@ int	valid_sphere(char *line)
 	return (TRUE);
 }
 
-
 int	valid_plane(char *line)
 {
 	char	**fields;
@@ -119,4 +116,3 @@ int	valid_plane(char *line)
 		return (FALSE);
 	return (TRUE);
 }
-

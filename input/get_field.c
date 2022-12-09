@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 20:12:39 by marius            #+#    #+#             */
-/*   Updated: 2022/12/09 11:33:39 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:21:48 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	valid_triple_field(char *field, double min, double max, int is_in)
 	return (TRUE);
 }
 
-double	ret_num(int *dotcount, char *field, double range[3], int is_int)
+double	ret_num(double *dotcount, char *field, double range[3], int is_int)
 {
 	double	res;
 
@@ -95,7 +95,7 @@ double	get_num(char *field, double min, double max, int is_int)
 			if (range[2] == 2)
 				return (NAN);
 			if ((i == 0 || i == ft_strlen(field) - 1)
-				&& write(2, TRAIL_DECIMAL_POINT, 53))
+				&& write(2, DEC_TRAIL, 53))
 				return (NAN);
 		}
 		if (((field[i] == '-' && i != 0) || (field[i] == '-'

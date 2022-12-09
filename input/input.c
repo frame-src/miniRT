@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:56:36 by mawinter          #+#    #+#             */
-/*   Updated: 2022/10/31 20:06:27 by marius           ###   ########.fr       */
+/*   Updated: 2022/12/09 12:26:41 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
-
 
 int	get_file(char *filename)
 {
@@ -62,23 +61,21 @@ int	valid_input(char *filename)
 {
 	int		fd;
 	char	*line;
-	int		one_cam;
-	int		one_ambient;
-	int		one_light;
+	int		counters[3];
 
-	one_ambient = 0;
-	one_light = 0;
-	one_cam = 0;
+	counters[0] = 0;
+	counters[1] = 0;
+	counters[2] = 0;
 	fd = get_file(filename);
 	if (fd == -1)
 		return (FALSE);
 	line = get_next_line(fd);
 	while (line)
 	{
-		if ((one_cam == 2 || one_ambient == 2 || one_light == 2)
-			&& write(2, DECLAREDOUBLE, 63) && !close(fd))
+		if ((counters[0] == 2 || counters[1] == 2 || counters[2] == 2)
+			&& write(2, REPT, 63) && !close(fd))
 			return (FALSE);
-		if (!valid_line(line, &one_ambient, &one_cam, &one_light)
+		if (!valid_line(line, &counters[1], &counters[0], &counters[2])
 			&& free_1(line) && !close(fd))
 			return (FALSE);
 		free(line);

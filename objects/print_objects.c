@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:11:08 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/26 23:44:45 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:48:42 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	print_scene(t_scene *scene)
 	printf("Color:      %d %d %d\n", scene->ambient_l.color.r, scene->ambient_l.color.g, scene->ambient_l.color.b);
 	printf("Ratio:      %f\n", scene->ambient_l.ratio);
 	printf("================= Camera =========================\n");
-	printf("Position:   %f %f %f\n", scene->camera.v_position.x, scene->camera.v_position.y, scene->camera.v_position.z);
-	printf("Direction:  %f %f %f\n", scene->camera.v_direction.x, scene->camera.v_direction.y, scene->camera.v_direction.z);
+	printf("Position:   %f %f %f\n", scene->camera.position.x, scene->camera.position.y, scene->camera.position.z);
+	printf("Direction:  %f %f %f\n", scene->camera.direction.x, scene->camera.direction.y, scene->camera.direction.z);
 	printf("FOV:        %d\n", scene->camera.fov);
 	printf("---------------------to world---------------------\n");
 	print_matrix(scene->camera.m_camera_world);

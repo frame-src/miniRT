@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/11/29 18:09:49 by frmessin         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:47:33 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct s_ambient
 typedef struct s_camera
 {
 	t_vec3		rays[HEIGHT][WIDTH];
-	t_vec3		v_position;
-	t_vec3		v_direction;
+	t_vec3		position;
+	t_vec3		direction;
 	int			fov;
 
 	t_matrix4x4	m_camera_world;
