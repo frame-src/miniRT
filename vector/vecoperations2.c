@@ -6,47 +6,47 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:40:58 by marius            #+#    #+#             */
-/*   Updated: 2022/11/28 15:48:35 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:54:15 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vecmath.h"
 
-t_vec3 vec3_sub(t_vec3 v0, t_vec3 v1)
+t_vec3	vec3_sub(t_vec3 v0, t_vec3 v1)
 {
-	t_vec3 cross;
-    
+	t_vec3	cross;
+
 	cross.x = v0.x - v1.x;
 	cross.y = v0.y - v1.y;
 	cross.z = v0.z - v1.z;
-    return (cross);
+	return (cross);
 }
 
-t_vec3 vec3_mult(double t, t_vec3 v)
+t_vec3	vec3_mult(double t, t_vec3 v)
 {
-	t_vec3 cross;
-    
+	t_vec3	cross;
+
 	cross.x = t * v.x;
 	cross.y = t * v.y;
 	cross.z = t * v.z;
-    return (cross);
+	return (cross);
 }
 
-
-t_vec3 vec3_div(double t, t_vec3 v)
+t_vec3	vec3_div(double t, t_vec3 v)
 {
-	t_vec3 cross;
+	t_vec3	cross;
 
 	cross.x = t / v.x;
 	cross.y = t / v.y;
 	cross.z = t / v.z;
-    return (cross);
+	return (cross);
 }
+
 /*
 	returns a vector if is_dir is 1;
 	returns a point if is_dir is 0;
 */
-t_vec3 vec3_matrix_mult(t_matrix4x4 m, t_vec3 v, int is_dir)
+t_vec3	vec3_matrix_mult(t_matrix4x4 m, t_vec3 v, int is_dir)
 {
 	t_vec3	res;
 

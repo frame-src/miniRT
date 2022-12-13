@@ -1,28 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vecmath.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/13 13:50:16 by mawinter          #+#    #+#             */
+/*   Updated: 2022/12/13 13:51:19 by mawinter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VECMATH_H
 # define VECMATH_H
 # define EPSILON 0.000001
-#include <math.h>
+# include <math.h>
 
-typedef struct  s_matrix4x4
+typedef struct s_matrix4x4
 {
 	double	m[16];
 }	t_matrix4x4;
 
-typedef struct	s_vec3
+typedef struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
 }				t_vec3;
 
-typedef struct  s_vec4
+typedef struct s_vec4
 {
 	double	x;
 	double	y;
 	double	z;
 	double	t;
 }				t_vec4;
-
 double	vec3_length(t_vec3 v);
 double	vec3_dot(t_vec3 v0, t_vec3 v1);
 void	vec3_normalize(t_vec3 *v);
