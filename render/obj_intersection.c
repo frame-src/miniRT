@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/13 14:34:45 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:16:05 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,57 +77,26 @@ void	get_plane_intersect(t_hit_info *hit_rec, t_plane *plane, t_ray ray)
 	return the object stored at the node[index];
 */
 
-void	if_sphere_helper(t_hit_info	*tmp_record, t_object *cur_obj, t_ray ray)
-{
-	
-}
-
-
 void	obj_get_nearest(t_hit_info *hit_record, t_object *cur_obj, t_ray ray)
 {
+	int			idxs[2];
 	t_hit_info	tmp_record;
-	int			index;
-	int			minimum_index;
 
-	index = 0;
-	minimum_index = -1;
+	idxs[1] = 0;
+	idxs[0] = -1;
 	while (cur_obj)
 	{
 		tmp_record.t = -1;
 		tmp_record.object = NULL;
 		if (cur_obj->type == 's')
-		{
-			tmp_record.object = cur_obj;
-			get_sphere_intersect(&tmp_record, cur_obj->sphere, ray);
-			if (tmp_record.t >= 0.0L && tmp_record.t < hit_record->t)
-			{
-				*hit_record = tmp_record;
-				minimum_index = index;
-			}
-		}
+			if_sphere(hit_record, cur_obj, ray, idxs);
 		else if (cur_obj->type == 'p')
-		{
-			tmp_record.object = cur_obj;
-			get_plane_intersect(&tmp_record, cur_obj->plane, ray);
-			if (tmp_record.t >= 0.0L && tmp_record.t < hit_record->t)
-			{
-				*hit_record = tmp_record;
-				minimum_index = index;
-			}
-		}
+			if_plane(hit_record, cur_obj, ray, idxs);
 		else if (cur_obj->type == 'c')
-		{
-			tmp_record.object = cur_obj;
-			get_cylinder_intersect(&tmp_record, cur_obj->cylinder, ray);
-			if (tmp_record.t >= 0.0L && tmp_record.t < hit_record->t)
-			{
-				*hit_record = tmp_record;
-				minimum_index = index;
-			}
-		}
-		index++;
+			if_cyl(hit_record, cur_obj, ray, idxs);
+		idxs[1]++;
 		cur_obj = cur_obj->next;
 	}
-	if (minimum_index == -1)
+	if (idxs[0] == -1)
 		hit_record->object = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:03:26 by marius            #+#    #+#             */
-/*   Updated: 2022/12/13 14:30:55 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:17:08 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ void		norm_set_hit_record(t_hit_info *hit_record, t_ray ray, t_vec3 norm);
 t_vec3		cylinder_get_surface_normal(t_cylinder *cylinder, t_vec3 hitpoint);
 void		fill_hirecord(t_ray ray, t_cylinder *cylinder, double ts[3],
 				t_hit_info *hit_record);
+void		if_sphere(t_hit_info *hit_record, t_object *cur_obj,
+				t_ray ray, int idxs[2]);
+void		if_plane(t_hit_info *hit_record, t_object *cur_obj,
+				t_ray ray, int idxs[2]);
+void		if_cyl(t_hit_info *hit_record, t_object *cur_obj, t_ray ray,
+				int idxs[2]);
 #endif
