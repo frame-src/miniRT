@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/09 15:51:41 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:23:09 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 
 t_color	color_of_object(t_object *obj)
 {
-	// if (!obj)
-		// return ((t_color) {0,0,0});
 	if (obj->type == 's')
 		return (obj->sphere->color);
 	if (obj->type == 'p')
