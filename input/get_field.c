@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 20:12:39 by marius            #+#    #+#             */
-/*   Updated: 2022/12/09 12:21:48 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/09 15:50:58 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	valid_triple_field(char *field, double min, double max, int is_in)
 	triple = ft_split(field, ',');
 	if (!triple && write(2, MALLOC_FAIL, 19) && free_split(triple))
 		return (FALSE);
-	if (fields_count(triple) != 3 && write(2, NUM3, 35)
+	if (fields_count(triple) != 3 && write(2, NUM3, 33)
 		&& free_split(triple))
 		return (FALSE);
 	while (triple[i])

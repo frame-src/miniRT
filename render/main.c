@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/09 11:48:20 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/09 15:51:41 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ void	hook(void *param)
 		data = NULL;
 	int 			y;
 	int 			x;
-	t_color			color;
 	t_ray			light_ray;
 	t_ray			ray;
 	t_hit_info		hit_record;
 	t_hit_info		new_hit;
 
-	color.r = 0; color.g = 0; color.b = 255;
 	data = param;
 	y = 0;
 	x = 0;
@@ -109,9 +107,9 @@ int	main(int argc, char **argv)
 	}
 	print_scene(data->scene);
 	printf("GET SCENE SUCCESSFULL\n");
-	t_ray ray;
-	ray.origin = (t_point3) {0, 0, 0};
-	ray.direction = (t_vec3) {0, 1, 1};
+	// t_ray ray;
+	// ray.origin = (t_point3) {0, 0, 0};
+	// ray.direction = (t_vec3) {0, 1, 1};
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false);
 	if (!data->mlx)
 		exit(EXIT_FAILURE);

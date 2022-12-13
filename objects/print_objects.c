@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:11:08 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/09 11:48:42 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:57:34 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	print_ray(t_ray ray)
 	printf("direction: ");
 	print_vec3(ray.direction);
 }
-
 
 int	print_scene(t_scene *scene)
 {

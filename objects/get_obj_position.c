@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:43:18 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/28 19:44:49 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:41:33 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ t_vec3	get_obj_position(t_object *obj)
 		return (obj->plane->position);
 	if (obj->type == 'c')
 		return (obj->cylinder->position);
-	printf("No object Found");
-	return ((t_vec3) {0,0,0});
+	return ((t_vec3){0, 0, 0});
 }

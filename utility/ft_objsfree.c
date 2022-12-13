@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:45:40 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 11:04:03 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:52:23 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_objsfree(t_object *lst)
 {
-	t_object *tmp;
+	t_object	*tmp;
 
 	while (lst)
 	{

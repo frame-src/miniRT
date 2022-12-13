@@ -6,13 +6,13 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 19:27:12 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/25 21:32:09 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:39:22 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-t_object *ft_objat(t_object *head, int idx)
+t_object	*ft_objat(t_object *head, int idx)
 {
 	int	i;
 
@@ -24,5 +24,5 @@ t_object *ft_objat(t_object *head, int idx)
 		i++;
 		head = head->next;
 	}
-	return NULL;
+	return (NULL);
 }
