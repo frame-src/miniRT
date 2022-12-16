@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check_element.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:43:57 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/16 18:30:29 by marius           ###   ########.fr       */
+/*   Updated: 2022/12/16 18:35:47 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	valid_camera(char *line)
 	if (fields_count(fields) != 4 && free_split(fields)
 		&& write(2, C_WRONG_NUM_FIELDS, 38))
 		return (FALSE);
-	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0) &&free_split(fields))
+	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0) && free_split(fields))
 		return (FALSE);
 	if (!valid_triple_field(fields[2], -1.0L, 1.0L, 0) && free_split(fields))
 		return (FALSE);
