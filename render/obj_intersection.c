@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:45:02 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/13 15:16:05 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:55:52 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,11 @@ void	get_plane_intersect(t_hit_info *hit_rec, t_plane *plane, t_ray ray)
 void	obj_get_nearest(t_hit_info *hit_record, t_object *cur_obj, t_ray ray)
 {
 	int			idxs[2];
-	t_hit_info	tmp_record;
 
 	idxs[1] = 0;
 	idxs[0] = -1;
 	while (cur_obj)
 	{
-		tmp_record.t = -1;
-		tmp_record.object = NULL;
 		if (cur_obj->type == 's')
 			if_sphere(hit_record, cur_obj, ray, idxs);
 		else if (cur_obj->type == 'p')

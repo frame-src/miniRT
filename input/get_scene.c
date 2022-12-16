@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/12/16 11:51:13 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/16 16:22:56 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,7 +278,7 @@ int	load_plane(char *line, t_object *obj)
 	if (!d_nearly_equal(1.0L, vec3_dot(plane->normal_vec, plane->normal_vec))
 		&& free_split(fields)
 		&& write(2, "Plane Orientation vector must be normalized\n", 45))
-		return (0);
+		return (0); 
 	return (free_split(fields));
 }
 

@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/12/13 11:57:17 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:32:11 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "../vector/vecmath.h"
 # include <stdbool.h>
 
-# define WIDTH 1600
-# define HEIGHT 900
+# define WIDTH 1000
+# define HEIGHT 1000
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
