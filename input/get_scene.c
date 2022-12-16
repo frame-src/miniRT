@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/12/09 12:24:35 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:51:13 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,7 +378,7 @@ t_scene	*get_scene(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!get_scene_loop(&line, scene, fd, &idx))
+		if (!get_scene_loop(&line, scene, fd, &idx) && !free_scene(scene))
 			return (NULL);
 	}
 	return (scene);

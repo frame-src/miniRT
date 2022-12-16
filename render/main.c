@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/13 12:23:09 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:50:02 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ t_color	color_of_object(t_object *obj)
 void	hook(void *param)
 {
 	t_data	*data;
-	data= NULL;
-	if(data)
-		data = NULL;
 	int 			y;
 	int 			x;
 	t_ray			light_ray;
@@ -56,7 +53,6 @@ void	hook(void *param)
 												data->scene->camera.rays[y][x], 1);
 			hit_record.t = INFINITY;
 			new_hit.t = INFINITY;
-
 			obj_get_nearest(&hit_record, data->scene->objects, ray);
 			if (!hit_record.object)
 				put_color_pixel(data, x, y,  (t_color) {0,0,0});	
@@ -83,11 +79,6 @@ void	hook(void *param)
 }
 
 
-void	free_data()
-{
-	return;
-}
-
 
 int	main(int argc, char **argv)
 {
@@ -104,10 +95,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	print_scene(data->scene);
-	printf("GET SCENE SUCCESSFULL\n");
-	// t_ray ray;
-	// ray.origin = (t_point3) {0, 0, 0};
-	// ray.direction = (t_vec3) {0, 1, 1};
 	data->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", false);
 	if (!data->mlx)
 		exit(EXIT_FAILURE);
