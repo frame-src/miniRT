@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check_element.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:43:57 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/09 12:28:45 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:30:29 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	valid_ambient(char *line)
 	if (!valid_triple_field(fields[2], 0.0L, 255.0L, 1)
 		&& free_split(fields))
 		return (FALSE);
-	free(fields);
+	free_split(fields);
 	return (TRUE);
 }
 
@@ -45,12 +45,13 @@ int	valid_camera(char *line)
 	if (fields_count(fields) != 4 && free_split(fields)
 		&& write(2, C_WRONG_NUM_FIELDS, 38))
 		return (FALSE);
-	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0))
+	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0) &&free_split(fields))
 		return (FALSE);
-	if (!valid_triple_field(fields[2], -1.0L, 1.0L, 0))
+	if (!valid_triple_field(fields[2], -1.0L, 1.0L, 0) && free_split(fields))
 		return (FALSE);
 	if (isnan(get_num(fields[3], 0.0L, 180.0L, 1)) && free_split(fields))
 		return (FALSE);
+	free_split(fields);
 	return (TRUE);
 }
 
@@ -66,12 +67,13 @@ int	valid_light(char *line)
 	if (fields_count(fields) != 4 && free_split(fields)
 		&& write(2, L_WRONG_NUM_FIELDS, 37))
 		return (FALSE);
-	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0))
+	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0) && free_split(fields))
 		return (FALSE);
 	if (isnan(get_num(fields[2], 0.0L, 1.0L, 0)) && free_split(fields))
 		return (FALSE);
-	if (!valid_triple_field(fields[3], 0.0L, 255.0L, 1))
+	if (!valid_triple_field(fields[3], 0.0L, 255.0L, 1) && free_split(fields))
 		return (FALSE);
+	free_split(fields);
 	return (TRUE);
 }
 
@@ -87,12 +89,13 @@ int	valid_sphere(char *line)
 	if (fields_count(fields) != 4 && free_split(fields)
 		&& write(2, SP_WRONG_NUM_FIELDS, 38))
 		return (FALSE);
-	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0))
+	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0) && free_split(fields))
 		return (FALSE);
 	if (isnan(get_num(fields[2], 0.0L, INFINITY, 0)) && free_split(fields))
 		return (FALSE);
-	if (!valid_triple_field(fields[3], 0.0L, 255.0L, 1))
+	if (!valid_triple_field(fields[3], 0.0L, 255.0L, 1) && free_split(fields))
 		return (FALSE);
+	free_split(fields);
 	return (TRUE);
 }
 
@@ -108,11 +111,12 @@ int	valid_plane(char *line)
 	if (fields_count(fields) != 4 && free_split(fields)
 		&& write(2, PL_WRONG_NUM_FIELDS, 37))
 		return (FALSE);
-	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0))
+	if (!valid_triple_field(fields[1], 0.0L, 0.0L, 0) && free_split(fields))
 		return (FALSE);
-	if (!valid_triple_field(fields[2], -1.0L, 1.0L, 0))
+	if (!valid_triple_field(fields[2], -1.0L, 1.0L, 0) && free_split(fields))
 		return (FALSE);
-	if (!valid_triple_field(fields[3], 0.0L, 255.0L, 1))
+	if (!valid_triple_field(fields[3], 0.0L, 255.0L, 1) && free_split(fields))
 		return (FALSE);
+	free_split(fields);
 	return (TRUE);
 }

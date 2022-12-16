@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check_element2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:45:52 by mawinter          #+#    #+#             */
-/*   Updated: 2022/11/30 12:33:13 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:18:27 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	valid_cylinder(char *line)
 		return (FALSE);
 	if (!valid_triple_field(fields[5], 0.0L, 255.0L, 1))
 		return (FALSE);
+	free_split(fields);
 	return (TRUE);
 }

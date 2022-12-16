@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 03:09:40 by marius            #+#    #+#             */
-/*   Updated: 2022/12/09 12:27:42 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:15:55 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ double	ret_num(double *dotcount, char *field, double range[3], int is_int);
 double	get_num(char *field, double min, double max, int is_int);
 /*					get_scene.c				*/
 t_scene	*get_scene(char *filename);
-
+int	free_scene(t_scene *scene);
 #endif
