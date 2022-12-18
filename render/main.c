@@ -6,7 +6,7 @@
 /*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/16 18:33:02 by marius           ###   ########.fr       */
+/*   Updated: 2022/12/18 21:43:13 by marius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,8 @@ void	hook(void *param)
 		g_img->instances[0].x += 5;
 }
 
-int32_t	main(void)
+
+int	main(void)
 {
 	mlx_t	*mlx;
 
