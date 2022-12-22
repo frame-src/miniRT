@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frame <frame@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:03:26 by marius            #+#    #+#             */
-/*   Updated: 2022/12/13 15:17:08 by mawinter         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:11:30 by frame            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,7 @@ void		if_plane(t_hit_info *hit_record, t_object *cur_obj,
 				t_ray ray, int idxs[2]);
 void		if_cyl(t_hit_info *hit_record, t_object *cur_obj, t_ray ray,
 				int idxs[2]);
+t_color		color_of_object(t_object *obj);
+void		hook(void *param);
+
 #endif
