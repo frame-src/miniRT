@@ -6,8 +6,8 @@ CC=gcc
 # LFLAGS=-ldl -L/Users/frmessin/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm 
 #CFLAGS=-Wall -Werror -Wextra -I/Users/frame/Desktop/miniRT_with_Marius/MLX42/include 
 #LFLAGS=-ldl -L/Users/frame/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm  
-CFLAGS=-Wall -Werror -Wextra -I/home/marius/Dev/miniRT/MLX42/include 
-LFLAGS=-ldl -lglfw -pthread -lm  
+# CFLAGS=-Wall -Werror -Wextra -I/home/marius/Dev/miniRT/MLX42/include 
+# LFLAGS=-ldl -lglfw -pthread -lm  
 
 MLX=libmlx42.a
 
