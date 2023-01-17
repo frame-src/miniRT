@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marius <marius@student.42.fr>              +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2022/12/16 18:08:59 by marius           ###   ########.fr       */
+/*   Updated: 2023/01/17 12:42:56 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "../vector/vecmath.h"
 # include <stdbool.h>
 
-# define WIDTH 200
-# define HEIGHT 200
+# define WIDTH 800
+# define HEIGHT 800
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;

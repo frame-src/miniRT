@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frame <frame@student.42.fr>                +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/22 15:15:31 by frame            ###   ########.fr       */
+/*   Updated: 2023/01/17 13:29:33 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/MLX42.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -20,6 +19,23 @@
 
 void	put_color_pixel(t_data *data, int x, int y, t_color color)
 {
+	t_color ambient_color;
+
+	ambient_color.r = (data->scene->ambient_l.color.r * data->scene->ambient_l.ratio);
+	ambient_color.g = (data->scene->ambient_l.color.g * data->scene->ambient_l.ratio);
+	ambient_color.b = (data->scene->ambient_l.color.b * data->scene->ambient_l.ratio);
+	if (color.r + ambient_color.r > 255)
+		color.r = 255;
+	else
+		color.r = color.r + ambient_color.r;
+	if (color.g + ambient_color.g > 255)
+		color.g = 255;
+	else
+		color.g = color.g + ambient_color.g;
+	if (color.b + ambient_color.b > 255)
+		color.b = 255;
+	else
+		color.b = color.b + ambient_color.b;
 	mlx_put_pixel(data->g_img,
 		x, y, \
 		color.r << 24 | \

@@ -2,8 +2,8 @@ NAME=minirt
 CC=gcc
 # CFLAGS=-Wall -Werror -Wextra  -I/Users/mawinter/Desktop/projects/miniRT/MLX42/include
 # LFLAGS=-ldl -L/Users/mawinter/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm
-# CFLAGS=-Wall -Werror -Wextra  -I/Users/frmessin/Desktop/miniRT_mawinter/Marius/MLX42/include -fsanitize=address
-# LFLAGS=-ldl -L/Users/frmessin/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm 
+CFLAGS=-Wall -Werror -Wextra  -I/Users/frmessin/Documents/42_project/miniRT/MLX42/include
+LFLAGS=-ldl -L/Users/frmessin/goinfre/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm
 #CFLAGS=-Wall -Werror -Wextra -I/Users/frame/Desktop/miniRT_with_Marius/MLX42/include 
 #LFLAGS=-ldl -L/Users/frame/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm  
 # CFLAGS=-Wall -Werror -Wextra -I/home/marius/Dev/miniRT/MLX42/include 
@@ -18,7 +18,7 @@ utilitysources=long_atoi.c ft_isalpha.c ft_split.c ft_strlen.c ft_strcmp.c ft_su
 
 vectorsources=vecoperations1.c vecoperations2.c vecoperations3.c print_utils.c\
 
-rendersources=main.c obj_intersection.c light_ray.c cylinder_intersection.c color_calcs.c move_by_vec_ratio.c hittable_utils.c obj_intersection2.c\
+rendersources=main.c obj_intersection.c hook.c light_ray.c cylinder_intersection.c color_calcs.c move_by_vec_ratio.c hittable_utils.c obj_intersection2.c\
 
 objectsources=object_matrix.c print_objects.c get_obj_position.c get_surface_normal.c\
 
