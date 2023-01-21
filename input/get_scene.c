@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_scene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 19:43:16 by marius            #+#    #+#             */
-/*   Updated: 2022/12/16 16:22:56 by mawinter         ###   ########.fr       */
+/*   Updated: 2023/01/21 16:34:31 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,18 +168,19 @@ int	set_cam_rays(int fov, t_vec3 rays[HEIGHT][WIDTH])
 	y = 0;
 	if (!fov)
 		return (0);
-	double width = screenratio * tan(M_PI / 180.0L * (fov / 2));
+	double l = screenratio * tan(M_PI / 180.0L * (fov / 2));
+	
 	if (fov == 180)
-		width = 1000;
-	xstep = width / WIDTH;
-	ystep = 1.0L / HEIGHT;
+		l = 1000;
+	xstep = l / WIDTH;
+	ystep = l / (HEIGHT);
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			ray.x = - width / 2.0L + x * xstep + 0.5 * xstep;
-			ray.y = 0.5 - y * ystep - 0.5 * ystep;
+			ray.x = - l/ 2.0L + x * xstep + 0.5 * xstep;
+			ray.y =  l * 0.5L - y * ystep - 0.5 * ystep;
 			ray.z = 1;
 			vec3_normalize(&ray);
 			rays[y][x] = ray;
