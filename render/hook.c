@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frame <frame@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2023/01/21 18:12:25 by mawinter         ###   ########.fr       */
+/*   Updated: 2023/01/21 21:55:21 by frame            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,19 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 		color.b << 8 | \
 		255);
 }
+//object light < object nearest
+static bool is_light_closer(t_data *data, t_hit_info newhit, t_hit_info oldhit, t_ray ray, t_ray new_ray)
+{	
+	t_vec3 old_hit = vec3_add(vec3_mult(oldhit.t, ray.direction), ray.origin);
+	t_vec3 new_hit = vec3_add(vec3_mult(newhit.t, new_ray.direction), new_ray.origin);
 
-bool is_light_closer(t_scene t_data, t_hit_info newhit, t_hit_info oldhit)
-{
-	double oldhit_tolight;
-	double oldhit_tonewhit;
+	t_vec3 oldhit_tolight = vec3_sub(old_hit, data->scene->light.position);
+	t_vec3 oldhit_to_newhit = vec3_sub(old_hit, new_hit);
 
-	if (oldhit.object->plane)
-	{
-		oldhit_tolight = vec3_length(vec3_sub(t_data.light.position, oldhit.object.));
-		
-	}
+	if (vec3_length(oldhit_tolight) <= vec3_length(oldhit_to_newhit))
+		return (true);
+	else
+		return (false);
 }
 
 static void	ray_setter(const int *itr, t_data *data,
@@ -67,8 +69,8 @@ static void	ray_setter(const int *itr, t_data *data,
 
 	new_hit.t = INFINITY;
 	light_ray = get_light_ray(hit_record, &ray, data->scene);
-	obj_get_nearest_w_light(&new_hit, data->scene->objects, light_ray);
-	if (new_hit.object && )
+	obj_get_nearest(&new_hit, data->scene->objects, light_ray);
+	if (new_hit.object && !is_light_closer(data,new_hit ,hit_record, ray, light_ray)) //&& nearet ligh
 	{
 		put_color_pixel(data, itr[0], itr[1], (t_color){0, 0, 0});
 	}

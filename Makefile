@@ -1,11 +1,11 @@
 NAME=minirt
 CC=gcc
-CFLAGS=-Wall -Werror -Wextra  -I/Users/mawinter/Desktop/projects/miniRT/MLX42/include
-LFLAGS=-ldl -L/Users/mawinter/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm
+# CFLAGS=-Wall -Werror -Wextra  -I/Users/mawinter/Desktop/projects/miniRT/MLX42/include
+# LFLAGS=-ldl -L/Users/mawinter/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm
 # CFLAGS=-Wall -Werror -Wextra  -I/Users/frmessin/Desktop/miniRT_last/MLX42/include
 # LFLAGS=-ldl -L/Users/frmessin/goinfre/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm
-#CFLAGS=-Wall -Werror -Wextra -I/Users/frame/Desktop/miniRT_with_Marius/MLX42/include 
-#LFLAGS=-ldl -L/Users/frame/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm  
+CFLAGS=-Wall -Werror -Wextra -I/Users/frame/Documents/miniRT/MLX42/include 
+LFLAGS=-ldl -L/Users/frame/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm  
 # CFLAGS=-Wall -Werror -Wextra -I/home/marius/Dev/miniRT/MLX42/include 
 # LFLAGS=-ldl -lglfw -pthread -lm  
 
