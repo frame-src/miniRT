@@ -1,7 +1,13 @@
 NAME=minirt
 CC=gcc
 CFLAGS=-Wall -Werror -Wextra  -I$(PWD)/MLX42/include
-LFLAGS=-ldl -L/Users/$(USER)/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm 
+# LFLAGS=-ldl -L/Users/$(USER)/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm 
+LFLAGS=-ldl -L$(HOME)/goinfre/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm 
+
+
+# rm -rf $HOME/.brew && rm -rf $HOME/goinfre/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/goinfre/.brew && echo 'export PATH=$HOME/goinfre/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
+# brew install glfw
+
 
 MLX=libmlx42.a
 
@@ -49,6 +55,7 @@ debug:
 	cd ./MLX42 && make
 	mv ./MLX42/$(MLX) .
 	$(CC) $(CFLAGS) -g $(inputsourcespath) $(utilitsourcesspath) $(vectorsourcespath) $(rendersourcespath) $(objectsourcespath) $(MLX) -o $(NAME) $(LFLAGS)
+
 
 fclean: clean
 	rm -rf $(MLX)
