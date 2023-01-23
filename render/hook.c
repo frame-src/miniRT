@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frame <frame@student.42.fr>                +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2023/01/21 21:55:21 by frame            ###   ########.fr       */
+/*   Updated: 2023/01/23 10:50:26 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@
 
 void	put_color_pixel(t_data *data, int x, int y, t_color color)
 {
-	t_color ambient_color;
+	t_color	ambient_color;
 
-	ambient_color.r = (data->scene->ambient_l.color.r * data->scene->ambient_l.ratio);
-	ambient_color.g = (data->scene->ambient_l.color.g * data->scene->ambient_l.ratio);
-	ambient_color.b = (data->scene->ambient_l.color.b * data->scene->ambient_l.ratio);
+	ambient_color.r = (data->scene->ambient_l.color.r \
+				* data->scene->ambient_l.ratio);
+	ambient_color.g = (data->scene->ambient_l.color.g \
+				* data->scene->ambient_l.ratio);
+	ambient_color.b = (data->scene->ambient_l.color.b \
+				* data->scene->ambient_l.ratio);
 	if (color.r + ambient_color.r > 255)
 		color.r = 255;
 	else
@@ -36,48 +39,60 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 		color.b = 255;
 	else
 		color.b = color.b + ambient_color.b;
-	mlx_put_pixel(data->g_img,
-		x, y, \
-		color.r << 24 | \
-		color.g << 16 | \
-		color.b << 8 | \
-		255);
+	mlx_put_pixel(data->g_img, x, y, color.r << 24 | \
+		color.g << 16 | color.b << 8 | 255);
 }
-//object light < object nearest
-static bool is_light_closer(t_data *data, t_hit_info newhit, t_hit_info oldhit, t_ray ray, t_ray new_ray)
+
+/*
+	object light < object nearest
+	0 is old_ray
+	1 is new_ray
+*/
+static bool	is_light_closer(t_data *data, t_hit_info newhit,
+		t_hit_info oldhit, t_ray *rays)
 {	
-	t_vec3 old_hit = vec3_add(vec3_mult(oldhit.t, ray.direction), ray.origin);
-	t_vec3 new_hit = vec3_add(vec3_mult(newhit.t, new_ray.direction), new_ray.origin);
+	t_vec3	old_hit;
+	t_vec3	new_hit;
+	t_vec3	oldhit_tolight;
+	t_vec3	oldhit_to_newhit;
 
-	t_vec3 oldhit_tolight = vec3_sub(old_hit, data->scene->light.position);
-	t_vec3 oldhit_to_newhit = vec3_sub(old_hit, new_hit);
-
+	old_hit = vec3_add(vec3_mult(oldhit.t, rays[0].direction), rays[0].origin);
+	new_hit = vec3_add(vec3_mult(newhit.t, rays[1].direction), rays[1].origin);
+	oldhit_tolight = vec3_sub(old_hit, data->scene->light.position);
+	oldhit_to_newhit = vec3_sub(old_hit, new_hit);
 	if (vec3_length(oldhit_tolight) <= vec3_length(oldhit_to_newhit))
 		return (true);
 	else
 		return (false);
 }
 
+/*
+	light_rays indexes
+	0 is old_ray
+	1 is new_ray
+*/
 static void	ray_setter(const int *itr, t_data *data,
 	t_hit_info hit_record, t_ray ray)
 {
-	t_ray			light_ray;
+	t_ray			light_rays[2];
 	t_hit_info		new_hit;
 	double			nom;
 	double			denom;
 	double			res;
 
 	new_hit.t = INFINITY;
-	light_ray = get_light_ray(hit_record, &ray, data->scene);
-	obj_get_nearest(&new_hit, data->scene->objects, light_ray);
-	if (new_hit.object && !is_light_closer(data,new_hit ,hit_record, ray, light_ray)) //&& nearet ligh
+	light_rays[0] = ray;
+	light_rays[1] = get_light_ray(hit_record, &ray, data->scene);
+	obj_get_nearest(&new_hit, data->scene->objects, light_rays[1]);
+	if (new_hit.object && !is_light_closer(data, new_hit,
+			hit_record, light_rays))
 	{
 		put_color_pixel(data, itr[0], itr[1], (t_color){0, 0, 0});
 	}
 	else
 	{
-		nom = vec3_dot(light_ray.direction, hit_record.normal);
-		denom = vec3_length(light_ray.direction);
+		nom = vec3_dot(light_rays[1].direction, hit_record.normal);
+		denom = vec3_length(light_rays[1].direction);
 		res = (nom / denom);
 		put_color_pixel(data, itr[0], itr[1],
 			color_mult_ratio(color_of_object(hit_record.object), res));

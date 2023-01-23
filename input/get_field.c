@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   get_field.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 20:12:39 by marius            #+#    #+#             */
-/*   Updated: 2022/12/09 15:50:58 by mawinter         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:32:02 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
+
+t_vec3	get_vector_field(char *field);
+int		fields_count(char **fields);
+int		valid_triple_field(char *field, double min, double max, int is_in);
+double	ret_num(double *dotcount, char *field, double range[3], int is_int);
+double	get_num(char *field, double min, double max, int is_int);
 
 int	fields_count(char **fields)
 {
@@ -103,4 +109,28 @@ double	get_num(char *field, double min, double max, int is_int)
 			return (NAN);
 	}
 	return (ret_num(&range[2], field, range, is_int));
+}
+
+t_vec3	get_vector_field(char *field)
+{
+	char	**triple;
+	int		i;
+	t_vec3	c;
+
+	i = 0;
+	triple = ft_split(field, ',');
+	if (!triple)
+		return ((t_vec3){INFINITY, INFINITY, INFINITY});
+	while (triple[i])
+	{
+		if (i == 0)
+			c.x = ft_atod(triple[i]);
+		else if (i == 1)
+			c.y = ft_atod(triple[i]);
+		else
+			c.z = ft_atod(triple[i]);
+		i++;
+	}
+	free_split(triple);
+	return (c);
 }

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_intersection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:02:38 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/13 12:19:18 by mawinter         ###   ########.fr       */
+/*   Updated: 2023/01/23 10:51:21 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 /*
 	checking the body of the cylinder; 
-
 */
 static	double	cylinder_check_limit(t_cylinder *cylinder,
 		t_ray l_ray, double t)

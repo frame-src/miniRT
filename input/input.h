@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 03:09:40 by marius            #+#    #+#             */
-/*   Updated: 2022/12/16 18:35:30 by mawinter         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:11:27 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,22 @@ double	get_num(char *field, double min, double max, int is_int);
 /*					get_scene.c				*/
 t_scene	*get_scene(char *filename);
 int		free_scene(t_scene *scene);
+
+int		load_light(char *line, t_light *light);
+int		load_cylinder(char *line, t_object *object);
+void	load_cyl_help(t_cylinder *cyl, char **fields);
+int		load_plane(char *line, t_object *obj);
+int		load_sphere(char *line, t_object *object);
+
+int		free_scene(t_scene *scene);
+int		obj_counter(char *filename, int *spherecount,
+			int *planecount, int *cylindercount);
+void	*alloc_objects(t_scene *scene, int counters[3]);
+t_scene	*alloc_scene(char *filename);
+
+t_color	get_color_field(char *field);
+int		load_ambient(char *line, t_ambient *ambient);
+int		set_cam_rays(int fov, t_vec3 rays[HEIGHT][WIDTH]);
+t_vec3	get_vector_field(char *field);
+
 #endif

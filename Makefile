@@ -2,16 +2,16 @@ NAME=minirt
 CC=gcc
 # CFLAGS=-Wall -Werror -Wextra  -I/Users/mawinter/Desktop/projects/miniRT/MLX42/include
 # LFLAGS=-ldl -L/Users/mawinter/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm
-# CFLAGS=-Wall -Werror -Wextra  -I/Users/frmessin/Desktop/miniRT_last/MLX42/include
-# LFLAGS=-ldl -L/Users/frmessin/goinfre/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm
-CFLAGS=-Wall -Werror -Wextra -I/Users/frame/Documents/miniRT/MLX42/include 
-LFLAGS=-ldl -L/Users/frame/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm  
+CFLAGS=-Wall -Werror -Wextra  -I/Users/frmessin/Desktop/miniRT_last/MLX42/include
+LFLAGS=-ldl -L/Users/frmessin/goinfre/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm
+# CFLAGS=-Wall -Werror -Wextra -I/Users/frame/Documents/miniRT/MLX42/include 
+# LFLAGS=-ldl -L/Users/frame/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm  
 # CFLAGS=-Wall -Werror -Wextra -I/home/marius/Dev/miniRT/MLX42/include 
 # LFLAGS=-ldl -lglfw -pthread -lm  
 
 MLX=libmlx42.a
 
-inputsources=input_check_element.c input_check_element2.c input_utils.c input.c ft_atod.c in_range.c get_field.c get_scene.c \
+inputsources=input_check_element.c input_check_element2.c input_utils.c input.c ft_atod.c in_range.c get_field.c get_scene.c get_objects.c scene_settings.c alloc_mem.c \
 
 utilitysources=long_atoi.c ft_isalpha.c ft_split.c ft_strlen.c ft_strcmp.c ft_substr.c ft_calloc.c ft_bzero.c get_next_line_utils.c get_next_line.c \
 	ft_isdigit.c ft_strncmp.c free_1.c ft_free_split_void.c ft_memset.c ft_objnew.c ft_objsfree.c ft_objadd_back.c ft_objat.c ft_lstsize.c d_nearly_equal.c\
