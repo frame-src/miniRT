@@ -6,7 +6,7 @@
 /*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/21 18:11:05 by mawinter         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:46:39 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "../vector/vecmath.h"
 # include <stdbool.h>
 
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
@@ -70,7 +70,7 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_vec3	position;
-	double	brightness_ratio;
+	double	br;
 	t_color	color;
 }				t_light;
 

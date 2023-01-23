@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2023/01/23 10:50:26 by frmessin         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:53:18 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ void	put_color_pixel(t_data *data, int x, int y, t_color color)
 				* data->scene->ambient_l.ratio);
 	ambient_color.b = (data->scene->ambient_l.color.b \
 				* data->scene->ambient_l.ratio);
-	if (color.r + ambient_color.r > 255)
+	if (color.r * data->scene->light.br + ambient_color.r > 255)
 		color.r = 255;
 	else
-		color.r = color.r + ambient_color.r;
-	if (color.g + ambient_color.g > 255)
+		color.r = color.r * data->scene->light.br + ambient_color.r;
+	if (color.g * data->scene->light.br + ambient_color.g > 255)
 		color.g = 255;
 	else
-		color.g = color.g + ambient_color.g;
-	if (color.b + ambient_color.b > 255)
+		color.g = color.g * data->scene->light.br + ambient_color.g;
+	if (color.b * data->scene->light.br + ambient_color.b > 255)
 		color.b = 255;
 	else
-		color.b = color.b + ambient_color.b;
+		color.b = color.b * data->scene->light.br + ambient_color.b;
 	mlx_put_pixel(data->g_img, x, y, color.r << 24 | \
 		color.g << 16 | color.b << 8 | 255);
 }

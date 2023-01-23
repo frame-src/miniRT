@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_settings.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:05:33 by frmessin          #+#    #+#             */
-/*   Updated: 2023/01/23 12:32:25 by frmessin         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:57:17 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,14 @@ int	load_ambient(char *line, t_ambient *ambient)
 	coord:	x --> coord[0],
 			y --> coord[1];
 */
-static double	screenratio(void)
+static double	sr(void)
 {
 	return ((double) WIDTH / (double) HEIGHT);
 }
 
-static double	step(double l, int i)
+static double	step(double l)
 {
-	double	coord_step[2];
-
-	coord_step[0] = l / WIDTH;
-	coord_step[1] = l / HEIGHT;
-	return (coord_step[i]);
+	return (l / WIDTH);
 }
 
 int	set_cam_rays(int fov, t_vec3 rays[HEIGHT][WIDTH])
@@ -85,7 +81,7 @@ int	set_cam_rays(int fov, t_vec3 rays[HEIGHT][WIDTH])
 	coord[1] = 0;
 	if (!fov)
 		return (0);
-	l = screenratio() * tan(M_PI / 180.0L * (fov / 2));
+	l = tan(M_PI / 180.0L * (fov / 2));
 	if (fov == 180)
 		l = 1000;
 	while (coord[1] < HEIGHT)
@@ -93,8 +89,8 @@ int	set_cam_rays(int fov, t_vec3 rays[HEIGHT][WIDTH])
 		coord[0] = 0;
 		while (coord[0] < WIDTH)
 		{
-			ray.x = -l / 2.0L + coord[0] * step(l, 0) + 0.5 * step(l, 0);
-			ray.y = l * 0.5L - coord[1] * step(l, 1) - 0.5 * step(l, 1);
+			ray.x = -l / 2.0L + coord[0] * step(l) + 0.5 * step(l);
+			ray.y = l * 0.5L / sr() - coord[1] * step(l) - 0.5 * step(l);
 			ray.z = 1;
 			vec3_normalize(&ray);
 			rays[coord[1]][coord[0]] = ray;

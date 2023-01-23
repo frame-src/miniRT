@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:05:37 by frmessin          #+#    #+#             */
-/*   Updated: 2023/01/23 12:11:53 by frmessin         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:46:39 by mawinter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	load_light(char *line, t_light *light)
 	light->position = get_vector_field(fields[1]);
 	if (light->position.x == INFINITY && free_split(fields))
 		return (0);
-	light->brightness_ratio = ft_atod(fields[2]);
+	light->br = ft_atod(fields[2]);
 	free_split(fields);
 	return (1);
 }
