@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2023/01/23 13:23:12 by mawinter         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:58:25 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <memory.h>
-// #define WIDTH 256
-// #define HEIGHT 256
 
 #include "../minirt.h"
 
@@ -26,6 +24,28 @@ int	error_scene(t_data *data)
 	free(data);
 	return (1);
 }
+
+static void	esc_key_pressing(mlx_key_data_t keydata, void *param)
+{
+	t_data	*data;
+
+	data = param;
+	if (keydata.key == 256)
+	{
+		mlx_terminate(data->mlx);
+		free_scene(data->scene);
+		free(data);
+		exit(EXIT_SUCCESS);
+	}
+}
+
+/*
+void leaks (void)
+{
+	system("leaks miniRT");
+}
+	atexit(leaks);
+*/
 
 int	main(int argc, char **argv)
 {
@@ -45,6 +65,7 @@ int	main(int argc, char **argv)
 		data->g_img->width * data->g_img->height * sizeof(int));
 	mlx_image_to_window(data->mlx, data->g_img, 0, 0);
 	mlx_loop_hook(data->mlx, &hook, data);
+	mlx_key_hook(data->mlx, esc_key_pressing, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
 	free_scene(data->scene);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:56:36 by mawinter          #+#    #+#             */
-/*   Updated: 2022/12/09 12:26:41 by mawinter         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:21:49 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int	valid_input(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if ((counters[0] == 2 || counters[1] == 2 || counters[2] == 2)
-			&& write(2, REPT, 63) && !close(fd))
-			return (FALSE);
 		if (!valid_line(line, &counters[1], &counters[0], &counters[2])
 			&& free_1(line) && !close(fd))
+			return (FALSE);
+		if ((counters[0] == 2 || counters[1] == 2 || counters[2] == 2)
+			&& write(2, REPT, 63) && !close(fd))
 			return (FALSE);
 		free(line);
 		line = get_next_line(fd);

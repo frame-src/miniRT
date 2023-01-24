@@ -1,4 +1,4 @@
-NAME=minirt
+NAME=miniRT
 CC=gcc
 CFLAGS=-Wall -Werror -Wextra  -I$(PWD)/MLX42/include
 # LFLAGS=-ldl -L/Users/$(USER)/.brew/Cellar/glfw/3.3.8/lib -lglfw -pthread -lm 
@@ -60,5 +60,6 @@ debug:
 fclean: clean
 	rm -rf $(MLX)
 	rm -rf $(NAME)
+	rm -rf minirt.dSYM
 
 re: fclean all

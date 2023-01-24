@@ -6,7 +6,7 @@
 /*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:05:41 by frmessin          #+#    #+#             */
-/*   Updated: 2023/01/23 12:12:13 by frmessin         ###   ########.fr       */
+/*   Updated: 2023/01/23 18:38:53 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,6 @@ t_scene	*alloc_scene(char *filename)
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene && !close(fd))
 		return (NULL);
-	printf("sphere counter: %d\n", counters[0]);
-	printf("plane counter: %d\n", counters[1]);
-	printf("cylinder counter: %d\n", counters[2]);
 	if (!alloc_objects(scene, counters) && !close(fd))
 		return (NULL);
 	close(fd);

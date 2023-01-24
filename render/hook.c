@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mawinter <mawinter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:51:48 by mawinter          #+#    #+#             */
-/*   Updated: 2023/01/23 13:53:18 by mawinter         ###   ########.fr       */
+/*   Updated: 2023/01/24 18:55:26 by frmessin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static bool	is_light_closer(t_data *data, t_hit_info newhit,
 	old_hit = vec3_add(vec3_mult(oldhit.t, rays[0].direction), rays[0].origin);
 	new_hit = vec3_add(vec3_mult(newhit.t, rays[1].direction), rays[1].origin);
 	oldhit_tolight = vec3_sub(old_hit, data->scene->light.position);
+	oldhit_tolight = move_by_vec_ratio(oldhit_tolight, EPSILON, vec3_mult(-1, oldhit_tolight));
 	oldhit_to_newhit = vec3_sub(old_hit, new_hit);
 	if (vec3_length(oldhit_tolight) <= vec3_length(oldhit_to_newhit))
 		return (true);
