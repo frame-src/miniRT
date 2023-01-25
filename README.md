@@ -1,7 +1,7 @@
 <h1> Mini RT </h1>
 
 <p align="center">
-   <img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera0.png" height=600>
+   <img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera0.png" height=400>
    <sub> First Image we ever rendered</sub> </p>
 </br>
 
