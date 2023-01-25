@@ -13,7 +13,7 @@ will be capable of render beautiful images like this:
 
 </br>
 <p align="center">
-  <kbd><img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png?raw=true" height=250 alt="mask"></kbd>
+  <kbd><img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png" height=400 alt="mask"></kbd>
 </p>
 </br>
 
