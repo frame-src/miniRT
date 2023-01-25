@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frame <frame@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:22:36 by mawinter          #+#    #+#             */
-/*   Updated: 2023/01/24 18:48:03 by frmessin         ###   ########.fr       */
+/*   Updated: 2023/01/25 11:48:57 by frame            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_ray	get_light_ray(t_hit_info hit_record, t_ray *ray, t_scene *scene)
 	t_ray	light_ray;
 
 	hitpoint = vec3_add(ray->origin, vec3_mult(hit_record.t, ray->direction));
-	hitpoint = move_by_vec_ratio(hitpoint, EPSILON * 25, hit_record.normal);
+	hitpoint = move_by_vec_ratio(hitpoint, EPSILON, hit_record.normal);
 	light_ray.origin = hitpoint;
 	light_ray.direction = vec3_sub(scene->light.position, hitpoint);
 	vec3_normalize(&light_ray.direction);
