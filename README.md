@@ -16,35 +16,51 @@ will be capable of render beautiful images like this:
 </br>
 <p align="center">
    <img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png" height=600>
-   <sub> The same but in the input2.rt the camera is farther</sub></p>
+   <sub> The same but in the input2.rt the camera z component is farther</sub></p>
 </br>
 
 We had to handle multiple object, cylinders planes and spheres:
 
-![example1](.img/multi_90.png)
-<p align="center"> <sub> Multiple objs composition</sub></p>
+</br>
+<p align="center">
+   <img src="https://github.com/frame-src/miniRT/blob/main/img/multi_90.png" height=600>
+   <sub> Multiple objs composition</sub></p>
+</br>
 
 ...and diffent settings for the camera such as the FOV:
-
-![example2](.img/multi_180.png)
-<p align="center"> <sub> Same composition but maxFOV</sub></p>
+</br>
+<p align="center">
+   <img src="https://github.com/frame-src/miniRT/blob/main/img/multi_180.png" height=600>
+   <sub> Same composition but maxFOV</sub></p>
+</br>
 
 Different atmosphere can be settled setting different Ambient Light:
 
-![example3](.img/dark_light.png)
-<p align="center"> <sub> Single sphere, dark atmo</sub></p>
+</br>
+<p align="center">
+   <img src="https://github.com/frame-src/miniRT/blob/main/img/dark_light.png" height=600>
+   <sub>Single sphere, dark atmo</sub></p>
+</br>
 
 ...
-
-![example4](.img/dark_light_a.png)
-<p align="center"> <sub> Ambient Light ratio = 0.9</sub></p>
+</br>
+<p align="center">
+   <img src="https://github.com/frame-src/miniRT/blob/main/img/dark_light_a.png" height=600>
+   <sub> Ambient Light ratio = 0.9</sub></p>
+</br>
 
 Or the brightness can be modified changing the ration of the Spot Light:
 
-![example5](.img/dark_light_0.png)
-<p align="center"> <sub> Light parameter ratio = 0.1</sub></p>
+</br>
+<p align="center">
+   <img src="https://github.com/frame-src/miniRT/blob/main/img/dark_light_0.png" height=600>
+   <sub> Light parameter ratio = 0.1</sub></p>
+</br>
 
 enjoy:
 
-![example6](.img/dark_light_0.png)
-<p align="center"> <sub> Enjoy, Marius Winter and Francesco Messina </sub></p>
+</br>
+<p align="center">
+   <img src="https://github.com/frame-src/miniRT/blob/main/img/room.png" height=600>
+   <sub> Enjoy, Marius Winter and Francesco Messina </sub></p>
+</br>
