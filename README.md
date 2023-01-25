@@ -1,6 +1,6 @@
 <h1> Mini RT </h1>
 
-![logo](.img/first_camera0.png)
+![](.img/first_camera0.png)
 <p align="center"> <sub> First Image we ever rendered</sub></p>
 
 This project is an introduction to the beautiful world of Raytracing.
@@ -62,5 +62,5 @@ enjoy:
 </br>
 <p align="center">
    <img src="https://github.com/frame-src/miniRT/blob/main/img/room.png" height=600>
-   <sub> Enjoy, Marius Winter and Francesco Messina </sub></p>
+   <sub> Enjoy</sub></p>
 </br>
