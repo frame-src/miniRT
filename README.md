@@ -1,8 +1,10 @@
 <h1> Mini RT </h1>
-
+</br>
 <p align="center">
    <img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera0.png" height=400>
-   <sub> First Image we ever rendered</sub> </p>
+</p>
+</br>
+<p align="center"><sub>First Image we ever rendered</sub></p>
 </br>
 
 This project is an introduction to the beautiful world of Raytracing.
@@ -18,8 +20,9 @@ will be capable of render beautiful images like this:
 </br>
 <p align="center">
    <img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png" height=600>
-   <sub> The same but in the input2.rt the camera z component is farther</sub></p>
+</p>
 </br>
+<p align="center"><sub> The same but in the input2.rt the camera z component is farther</sub></p>
 
 We had to handle multiple object, cylinders planes and spheres:
 
