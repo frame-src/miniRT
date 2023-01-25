@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmessin <frmessin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frame <frame@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:03:23 by marius            #+#    #+#             */
-/*   Updated: 2023/01/23 14:42:51 by frmessin         ###   ########.fr       */
+/*   Updated: 2023/01/25 11:50:57 by frame            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 */
-# define WIDTH 800
-# define HEIGHT 450
+# define WIDTH 1366
+# define HEIGHT 768
 
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
