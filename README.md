@@ -8,7 +8,7 @@
 </p>
 </br>
 
-This project is an introduction to the beautiful world of Raytracing.
+This project is an introduction to the world of Raytracing.
 
 So once you run "make" the 
 ```bash 
