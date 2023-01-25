@@ -1,5 +1,8 @@
 <h1> Mini RT </h1>
 
+![logo](.img/first_camera0.png)
+<p align="center"> <sub> First Image we ever rendered</sub></p>
+
 This project is an introduction to the beautiful world of Raytracing.
 
 So once you run "make" the 
@@ -8,12 +11,11 @@ So once you run "make" the
 ```
 will be capable of render beautiful images like this:
 
-![logo](.img/first_camera0.png)
-<p align="center"> <sub> First Image we ever rendered</sub></p>
+
 
 </br>
 <p align="center">
-  <kbd><img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png" height=400 alt="mask"></kbd>
+  <kbd><img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png" height=400></kbd>
 </p>
 </br>
 
