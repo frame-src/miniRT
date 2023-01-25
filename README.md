@@ -15,7 +15,7 @@ will be capable of render beautiful images like this:
 
 </br>
 <p align="center">
-  <kbd><img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png" height=600></kbd>
+  <img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png" height=600>
 </p>
 <p align="center"> <sub> The same but in the input2.rt the camera is farther</sub></p>
 </br>
