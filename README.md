@@ -70,9 +70,6 @@ Or the brightness can be modified changing the ration of the Spot Light:
 </p>
 <p align="center"><sub> Light parameter ratio = 0.1</sub></p>
 </br>
-
-enjoy:
-
 </br>
 <p align="center">
    <img src="https://github.com/frame-src/miniRT/blob/main/img/room.png" height=400>
