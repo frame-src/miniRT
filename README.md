@@ -1,7 +1,9 @@
 <h1> Mini RT </h1>
 
-![](.img/first_camera0.png)
-<p align="center"> <sub> First Image we ever rendered</sub></p>
+<p align="center">
+   <img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera0.png" height=600>
+   <sub> First Image we ever rendered</sub> </p>
+</br>
 
 This project is an introduction to the beautiful world of Raytracing.
 
