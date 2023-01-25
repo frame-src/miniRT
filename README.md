@@ -15,11 +15,9 @@ will be capable of render beautiful images like this:
 
 </br>
 <p align="center">
-  <kbd><img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png" height=400></kbd>
+  <kbd><img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera1.png" height=600></kbd>
 </p>
 </br>
-
-![example](.img/first_camera1.png)
 <p align="center"> <sub> The same but in the input2.rt the camera is farther</sub></p>
 
 We had to handle multiple object, cylinders planes and spheres:
