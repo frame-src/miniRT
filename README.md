@@ -1,50 +1,48 @@
+<h1> Mini RT </h1>
 
-November 28 2022
+This project is an introduction to the beautiful world of Raytracing.
 
->	phong illumination?
-	https://www.scratchapixel.com/lessons/3d-basic-rendering/phong-shader-BRDF
-
-November 25 2022
-
->	added plane intersection:
-	int teory 
-		if the direction of the ray and the normal vector are parallel the dot product is zero; and they will never match;
-		else if they have a solution that is given by the common point so:
-		(p - p0) dot n = 0
-		l0 + l*t = p;
-
-		that solved in t give us:
-		t = [(p0 - l0) dot n ]/[l dot n]; 
-``` c
-
-double plane_intersection(t_plane, t_ray);
-``` 
-
-November 24 2022
-
-
-``` c
-t_object *object_return_nearest(t_object *list, t_ray *ray, double *t)
-{
-	iterate through the list
-	if(call object_get_intersection
-	and return the index of the nearest one;
-}
+So once you run "make" the 
+```bash 
+./miniRT ./source/<mapname>.rt
 ```
+will be capable of render beautiful images like this:
 
-object_get_intersection(t_object *list,)
-``` c
-t_color	*object_get_color(double *t, t_object *object, t_ray *ray)
-{
-	t_point *point;
+![](.img/Screenshot%202023-01-25%20at%2011.52.13.png)
+<p align="center"> <sub> First Image we ever rendered</sub></p>
 
-	point = point_calculate( t, ray);
 
-	if(object.type == spehere)
-		spehere_get_color()...
-	if(...)
-		..._get_color()...
-	...
+<h1> Mini RT </h1>
 
-}
+This project is an introduction to the beautiful world of Raytracing.
+
+So once you run "make" the 
+```bash 
+./miniRT ./source/<mapname>.rt
 ```
+will be capable of render beautiful images like this:
+
+![](.img/first_camera0.png)
+<p align="center"> <sub> First Image we ever rendered</sub></p>
+
+![](.img/first_camera1.png)
+<p align="center"> <sub> The same but in the input2.rt the camera is farther</sub></p>
+
+We had to handle multiple object, cylinders planes and spheres:
+![](.img/multi_90.png)
+<p align="center"> <sub> Multiple objs composition</sub></p>
+...and diffent settings for the camera such as the FOV:
+![](.img/multi_180.png)
+<p align="center"> <sub> Same composition but maxFOV</sub></p>
+Different atmosphere can be settled setting different Ambient Light:
+![](.img/dark_light.png)
+<p align="center"> <sub> Single sphere, dark atmo</sub></p>
+...
+![](.img/dark_light_a.png)
+<p align="center"> <sub> Ambient Light ratio = 0.9</sub></p>
+Or the brightness can be modified changing the ration of the Spot Light:
+![](.img/dark_light_0.png)
+<p align="center"> <sub> Light parameter ratio = 0.1</sub></p>
+enjoy:
+![](.img/dark_light_0.png)
+<p align="center"> <sub> Enjoy, Marius Winter and Francesco Messina </sub></p>
