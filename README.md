@@ -4,7 +4,7 @@
    <img src="https://github.com/frame-src/miniRT/blob/main/img/first_camera0.png" height=400>
 </p>
 <p align="center">
-   <sub>First Image we ever rendered</sub>
+   <sub>First Image we ever rendered</sub> 
 </p>
 </br>
 
